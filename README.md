@@ -5,7 +5,7 @@ Cited source : https://pdfs.semanticscholar.org/c082/f14d48d2ac744a5cdc2fbe7ac2a
 
 Speech recognition using dsp requires the use of mel frequency cepstrum coefficients to analyze the input signal and then vector quantization to correctly identify the speaker.
 
-Block Diagram: 
+Block Diagram: https://github.com/chrisjj12/Multi-Speaker-Identification/issues/1#issuecomment-716805919
 
 ### Frame Blocking
 

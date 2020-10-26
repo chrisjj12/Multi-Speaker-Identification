@@ -23,7 +23,7 @@ Signal: y1(n) = x1(n)w(n), 0<=n<=N-1 *N = number of samples per frame
 
 The next step is to do the fast fourier transform (DTF). This converts each frame of N samples from the time domain into the frequency domain. The FFT algorithm will compute the discrete fourier transform (DFT).
 
-Equation: 
+Equation: https://github.com/chrisjj12/Multi-Speaker-Identification/issues/1#issue-729231407
 
 
 ### Mel-Frequency Wrapping

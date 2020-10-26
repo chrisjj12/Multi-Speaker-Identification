@@ -30,7 +30,7 @@ Equation: https://github.com/chrisjj12/Multi-Speaker-Identification/issues/1#iss
 
 Since human perception of freqquency for speech signals don't follow a linear scale. The mel-frequency is a linear frequency spacing below 1000 Hz and logarithmic spacing above 1000 Hz.
 
-Mel frequency equation: ![image](https://www.google.com/search?q=mel+frequency+equation&tbm=isch&ved=2ahUKEwido8rvtdHsAhUMNd8KHcEXDlgQ2-cCegQIABAA&oq=mel+frequency+equation&gs_lcp=CgNpbWcQAzoECAAQQzoCCAA6BAgAEB46BAgAEBhQwRJYtxlg5hpoAHAAeACAAVGIAeQEkgEBOZgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=gVCWX93eOIzq_AbBr7jABQ&bih=713&biw=1440#imgrc=GxpVjgj3AZtG-M)
+Mel frequency equation: https://github.com/chrisjj12/Multi-Speaker-Identification/issues/1#issuecomment-716301118
 
 Using a filter bank, which is spaced uniformly on the mel scale, a spectrum can be formed. the mel spectrum coefficients, K, is usually 20.
 

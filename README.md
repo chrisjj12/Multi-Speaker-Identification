@@ -55,3 +55,6 @@ The acoustic vector will then be compared to previously recorded spoken words/ph
 
 Cited source: http://www.cs.cmu.edu/~alnu/sefiles/SE_4.pdf
 
+DNN-WPM: https://arxiv.org/pdf/1803.09016.pdf
+
+

@@ -29,7 +29,7 @@ Equation: ![FFT](https://github.com/chrisjj12/Multi-Speaker-Identification/blob/
 
 ### Mel-Frequency Wrapping
 
-Since human perception of freqquency for speech signals don't follow a linear scale. The mel-frequency is a linear frequency spacing below 1000 Hz and logarithmic spacing above 1000 Hz.
+Since human perception of frequency for speech signals don't follow a linear scale. The mel-frequency is a linear frequency spacing below 1000 Hz and logarithmic spacing above 1000 Hz.
 
 Mel frequency equation: ![MFCC](https://github.com/chrisjj12/Multi-Speaker-Identification/blob/master/MFCC.png)
 

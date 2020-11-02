@@ -1,7 +1,8 @@
 # Multi Speaker Identification
 
 ## DSP RESEARCH
-Cited source : https://pdfs.semanticscholar.org/c082/f14d48d2ac744a5cdc2fbe7ac2a55887c86f.pdf
+
+Cited source: https://pdfs.semanticscholar.org/c082/f14d48d2ac744a5cdc2fbe7ac2a55887c86f.pdf
 
 Speech recognition using dsp requires the use of mel frequency cepstrum coefficients to analyze the input signal and then vector quantization to correctly identify the speaker.
 
@@ -49,3 +50,8 @@ For each frame of about 30msec with some overlap, a vector of mel-frequency ceps
 ### Next Steps
 
 The acoustic vector will then be compared to previously recorded spoken words/phrases in a database to be able to detect whether the speaker can be recognized.
+
+## Machine Learning DNN
+
+Cited source: http://www.cs.cmu.edu/~alnu/sefiles/SE_4.pdf
+

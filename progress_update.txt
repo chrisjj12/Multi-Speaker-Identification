@@ -1,1 +1,0 @@
-10/23/2020- Attempted to test SINCNet on SCC GPU, system would not download the necessary requirements such as pytorch and pysoundfile. Going to look into and figure out why.

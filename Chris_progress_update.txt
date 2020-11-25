@@ -1,0 +1,3 @@
+10/23/2020- Attempted to test SINCNet on SCC GPU, system would not download the necessary requirements such as pytorch and pysoundfile. Going to look into and figure out why.
+11/25/2020- I apologize for my lack of consistency. Within the last month. I was able to get SINCNet up an running, do lots of DSP research, find, run, and understand sample DSP code, and start the react-native application. The DSP research is shown in the README file and the sample code is the directory labeled, "Speech_Feature_Extraction". This takes in a .wav file does the signal processing and mfcc, which results in K Coefficients.
+Next Steps- Create my own DSP code, create the GUI for the React-Native APP 

@@ -1,1 +1,2 @@
 1. Uploaded SincNet and found Convoltion step for the processing
+2. Run training for SincNet and obtain results from Model

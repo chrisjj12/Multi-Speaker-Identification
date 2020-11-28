@@ -1,2 +1,3 @@
 1. Uploaded SincNet and found Convoltion step for the processing
 2. Run training for SincNet and obtain results from Model
+3. Researched into noise cancelation and resulted in new discussion for architecture for system (new architecture is shown in Diagram on github)

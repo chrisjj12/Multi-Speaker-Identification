@@ -3,9 +3,9 @@
 3. Researched into noise cancelation and resulted in new discussion for architecture for system (new architecture is shown in Diagram on github)
 4. Initially found noise cancelation open-source ML models but that was dropped after finding a open-sourced speech separtion ML model
 5. Playing with speech separtion model code to understand what it does with the wav files
+6. update diagram for new architecture
 To Do:
 - run random noise into model and see result
 - run my own voice with another voice and observe results
-- update diagram for new architecture
 - covert the ML model from MATLAB code to C code
 - swap input of ML model from .wav file stored in a location to new input from react native

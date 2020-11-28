@@ -1,0 +1,1 @@
+1. Uploaded SincNet and found Convoltion step for the processing

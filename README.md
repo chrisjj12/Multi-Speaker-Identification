@@ -69,5 +69,5 @@ The home page has two different buttons, "First Time User" and "Operation."
 
 ### First Time User Instructions
 
-A first time user will press the record button and read a displayed statement outloud. Once that is finished they will enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
+A first time user will enter the "First Time User" button. Once they get to that new page, the user will press the record button and read a displayed statement outloud. Once that is finished they will enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
 

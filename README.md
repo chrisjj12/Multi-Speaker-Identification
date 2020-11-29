@@ -69,5 +69,8 @@ The home page has two different buttons, "First Time User" and "Operation."
 
 ### First Time User Instructions
 
-A first time user will enter the "First Time User" button. Once they get to that new page, the user will press the record button and read a displayed statement outloud. Once that is finished they will enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
+A first time user will enter the "First Time User" button. Once the user gets to that new page, the user will press the record button and read a displayed statement outloud. Once that is finished they will enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
 
+### Operation Instructions
+
+To test to see if the speaker can be identified, the user will hit the "Operation" button. Once the user gets to that new page, the user will press the record button and re-read the displayed statement outloud and then hit submit. The app will compare the K-coefficients to those in the .json database and if there is a match, the name of the user will pop-up, but if not, a pop-up saying, "No match" will be displayed.

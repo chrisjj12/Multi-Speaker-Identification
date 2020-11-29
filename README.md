@@ -63,3 +63,11 @@ Inputted signal -> ML -> DSP MFCC -> JSON Database
 
 The inputted signal will be processed by ML, which will eliminate the white noise to make the voice sound clearer and more understandable. Once that is done it will create a .wav file that will go through signal processing and then mel-frequency cepstral analysis to create K-coefficients. These K coefficients will be place in a .json database.
 
+## How the Application Works
+
+The home page has two different buttons, "First Time User" and "Operation." 
+
+### First Time User Instructions
+
+A first time user will press the record button and read a displayed statement outloud. Once that is finished they will enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
+

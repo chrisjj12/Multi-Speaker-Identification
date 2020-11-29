@@ -61,5 +61,5 @@ DNN-WPM: https://arxiv.org/pdf/1803.09016.pdf
 
 Inputted signal -> ML -> DSP MFCC -> JSON Database
 
-
+The inputted signal will be processed by ML, which will eliminate the white noise to make the voice sound clearer and more understandable. Once that is done it will create a .wav file that will go through signal processing and then mel-frequency cepstral analysis to create K-coefficients. These K coefficients will be place in a .json database.
 

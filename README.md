@@ -57,4 +57,9 @@ Cited source: http://www.cs.cmu.edu/~alnu/sefiles/SE_4.pdf
 
 DNN-WPM: https://arxiv.org/pdf/1803.09016.pdf
 
+## Code Diagram Explained
+
+Inputted signal -> ML -> DSP MFCC -> JSON Database
+
+
 

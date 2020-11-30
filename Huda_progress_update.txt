@@ -6,6 +6,7 @@
 6. update diagram for new architecture
 7. Ran white noise in combination with a person's voice
 --> Uexpected result: noise was considered the signal and the signal was considered noise
+--> Unexpected result: The output signal/noise .wav files came out to twice the length of the inputted signal
 
 To Do:
 - run random noise into model and see result

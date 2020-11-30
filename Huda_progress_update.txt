@@ -9,6 +9,7 @@
 --> Unexpected result: The output signal/noise .wav files came out to twice the length of the inputted signal
 --> Result: Noise was able to cancel some of the person's voice
 --> Result: The Voice was distinguishable but the white noise was not filtered out before or after the person's voice
+--> Result: still leakage of white noise
 
 To Do:
 - run random noise into model and see result

@@ -4,6 +4,9 @@
 4. Initially found noise cancelation open-source ML models but that was dropped after finding a open-sourced speech separtion ML model
 5. Playing with speech separtion model code to understand what it does with the wav files
 6. update diagram for new architecture
+7. Ran white noise in combination with a person's voice
+--> Uexpected result: noise was considered the signal and the signal was considered noise
+
 To Do:
 - run random noise into model and see result
 - run my own voice with another voice and observe results

@@ -6,13 +6,13 @@ function test_timit_general_kl_recurrent(modelname_in, theta, eI, stage, iter)
 %                   Department of Electrical and Computer Engineering
 %                   Department of Computer Science
 %
-eval_types={'dev','test'};
+eval_types={'test'};
 normalize = inline('x./max(abs(x)+1e-3)');
 
 for ieval=1:numel(eval_types)
 
-    [s1, fs]=audioread(['female_',eval_types{ieval},'.wav']);
-    [s2, fs]=audioread(['male_',eval_types{ieval},'.wav']);
+    [s1, fs]=audioread(['whitenoise_',eval_types{ieval},'.wav']);
+    [s2, fs]=audioread(['gettysburg_',eval_types{ieval},'.wav']);
    
     modelname=[modelname_in, '_', eval_types{ieval}];
 

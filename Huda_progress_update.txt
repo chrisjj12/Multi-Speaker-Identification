@@ -12,7 +12,6 @@
 --> Result: still leakage of white noise
 
 To Do:
-- run random noise into model and see result
 - run my own voice with another voice and observe results
 - covert the ML model from MATLAB code to C code
 - swap input of ML model from .wav file stored in a location to new input from react native

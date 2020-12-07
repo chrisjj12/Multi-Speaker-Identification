@@ -103,7 +103,7 @@ class first_time_user extends React.Component {
     });
   };
 
-  playback_recording = async(e) => {
+  stop_playback_recording = async(e) => {
     console.log('playback_recording');
     this.audioRecorderPlayer.stopPlayer();
     this.audioRecorderPlayer.removePlayBackListener();
@@ -122,7 +122,12 @@ class first_time_user extends React.Component {
         <Title>
           {this.state.playTime} / {this.state.duration}
         </Title>
-        <
+        <Button mode = "contained" icon = "play" onPress = {() => this.playback_recording()}>
+          PLAY
+        </Button>
+        <Button mode = "outlined" icon = "stop" onPress = {() => this.stop_playback_recording()}>
+          STOP
+        </Button>
       </Card>
     )
   }

@@ -17,13 +17,13 @@ function run_test_single_model
 
     ModelPath=[baseDir, filesep, 'codes',filesep,'denoising', filesep, 'demo'];
     
-    global SDR;
-    global SDR_bss3;
+%     global SDR;
+%     global SDR_bss3;
 
-    SDR.deviter=0;   SDR.devmax=0;   SDR.testmax=0;
-    SDR.devsar=0; SDR.devsir=0; SDR.testsar=0; SDR.testsir=0;
-    SDR_bss3.deviter=0;   SDR_bss3.devmax=0;   SDR_bss3.testmax=0;
-    SDR_bss3.devsar=0; SDR_bss3.devsir=0; SDR_bss3.testsar=0; SDR_bss3.testsir=0;
+%     SDR.deviter=0;   SDR.devmax=0;   SDR.testmax=0;
+%     SDR.devsar=0; SDR.devsir=0; SDR.testsar=0; SDR.testsir=0;
+%     SDR_bss3.deviter=0;   SDR_bss3.devmax=0;   SDR_bss3.testmax=0;
+%     SDR_bss3.devsar=0; SDR_bss3.devsir=0; SDR_bss3.testsar=0; SDR_bss3.testsir=0;
 
     j=870;
     

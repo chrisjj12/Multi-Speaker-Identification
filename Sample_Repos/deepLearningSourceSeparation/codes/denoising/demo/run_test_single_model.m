@@ -67,8 +67,8 @@ function run_test_single_model
     wav_noise = wav_noise./max(abs(wav_noise));    
 
     audiowrite([eI.saveDir, filesep,'separated_speech',num2str(index),'.wav'], wav_singal, fs);
-    audiowrite([eI.saveDir, filesep,'separated_noise',num2str(index),'.wav'], wav_noise, fs);
+    %audiowrite([eI.saveDir, filesep,'separated_noise',num2str(index),'.wav'], wav_noise, fs);
     
     % Get separation stats
-    [sdr,sir,sar,stoi] = sep_perf(wav_singal, [speech'; noise'], fs);    
+    %[sdr,sir,sar,stoi] = sep_perf(wav_singal, [speech'; noise'], fs);    
 end

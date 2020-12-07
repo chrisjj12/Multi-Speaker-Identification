@@ -1,114 +1,209 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, { Component } from 'react';
+import {StyleSheet, Text, View, Button,} from 'react-native';
+import AudioRecorderPlayer, {AVEncoderAudioQualityIOSType, AVEncodingOption, AudioEncoderAndroidType, AudioSet, AudioSourceAndroidType,} 
+from 'react-native-audio-recorder-player';
+import { Card, Button, Divider } from 'react-native-paper';
+//import Voice from 'react-native-voice';
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const Tab = createBottomTabNavigator();
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+export default class App extends Component {
+  render () {
+    return(
+      <NavigationContainer>
+        <Tab.Navigator initialRouteName = "Home">
+          <Tab.Screen name = "Home" component = {homepage}/>
+          <Tab.Screen name = "First Time User" component = {first_time_user}/>
+        </Tab.Navigator>
+      </NavigationContainer>
+    );    
+  }
+}
+
+function homepage () {
+  return(
+    <View style = {{flex: 1, justifyContent: "center", alignItems: "center"}}>
+      <Text style = {{textAlignVertical: "bottom", textAlign: "center", fontSize: 30, color: "black"}}>
+        Multi-Speaker Indentification
+      </Text>
+    </View>
   );
-};
+}
 
+class first_time_user extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggingIn: false,
+      recordSecs: 0,
+      recordTime: '00:00:00',
+      currentPostiionSec: 0,
+      currentDurationSec: 0,
+      playTime: '00:00:00',
+      duration: '00:00:00'
+    };
+    this.audioRecorderPlayer = new AudioRecorderPlayer();
+    this.audioRecorderPlayer.setSubscriptionDuration(0.09); //default is 0.1
+  }
+
+  start_recording = async() => {
+    const path = 'first_time.wav'
+    const AudioSet = {
+      AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
+      AudioSourceAndroid: AudioSourceAndroidType.MIC,
+      AVEncoderAudioQualityIOS: AVEncoderAudioQualityIOSType.high,
+      AVNumberofChannelsIOS: 2,
+      AVFormatIDIOS: AVEncodingOption.aac,
+    };
+    console.log('AudioSet', AudioSet);
+    const uri = await this.audioRecorderPlayer.startRecorder(path, AudioSet)
+    this.audioRecorderPlayer.addRecordBackListener((e) => {
+      this.setState({
+        recordSecs: e.current_position,
+        recordTime: this.audioRecorderPlayer.mmssss(
+          Math.floor(e.current_position),
+        ),
+      });
+    });
+    console.log(`uri: ${uri}`);
+  };
+
+  stop_recording = async() => {
+    const result  = await this.audioRecorderPlayer.stopRecorder();
+    this.audioRecorderPlayer.removeRecordBackListener();
+    this.setState({
+      recordSecs: 0,
+    });
+    console.log(result);
+  };
+
+  playback_recording = async(e) => {
+    console.log('playback_recording');
+    const path = 'first_time.wav'
+    const msg = await this.audioRecorderPlayer.startPlayer(path);
+    this.audioRecorderPlayer.setVolume(1.0);
+    console.log(msg);
+    this.audioRecorderPlayer.addPlayBackListener((e) => {
+      if (e.current_position === e.duration) {
+        console.log('finished');
+        this.audioRecorderPlayer.stopPlayer();
+      }
+      this.setState({
+        currentPostiionSec: e.current_position,
+        currentDurationSec: e.duration,
+        playTime: this. audioRecorderPlayer.mmssss(
+          Math.floor(e.current_position),
+        ),
+        duration: this.audioRecorderPlayer.mmssss(Math.floor(e.duration)),
+      });
+    });
+  };
+
+  stop_playback_recording = async(e) => {
+    console.log('playback_recording');
+    this.audioRecorderPlayer.stopPlayer();
+    this.audioRecorderPlayer.removePlayBackListener();
+  };
+
+  render() {
+    return (
+      <Card style = {{flex: 1, flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center'}}>
+        <Button mode = "contained" icon="record" onPress = {() => this.start_recording()}>
+          RECORD
+        </Button>
+        <Button mode = "outlined" icon = "stop" onPress = {() => this.stop_recording()}>
+          STOP
+        </Button>
+        < Divider/>
+        <Title>
+          {this.state.playTime} / {this.state.duration}
+        </Title>
+        <Button mode = "contained" icon = "play" onPress = {() => this.playback_recording()}>
+          PLAY
+        </Button>
+        <Button mode = "outlined" icon = "stop" onPress = {() => this.stop_playback_recording()}>
+          STOP
+        </Button>
+      </Card>
+    )
+  }
+
+}
+
+/*
+  constructor(props) {
+    super(props);
+    this.state = {
+      recognized: '',
+      started: '',
+      results: [],
+    };
+
+    Voice.onSpeechStart = this.onSpeechStart.bind(this);
+    Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
+    Voice.onSpeechResults = this.onSpeechResults.bind(this);
+  }
+
+  componentWillUnmount() {
+    Voice.destroy().then(Voice.removeAllListeners);
+  }
+
+  onSpeechStart(e) {
+    this.setState({
+      started: '√',
+    });
+  };
+
+  onSpeechRecognized(e) {
+    this.setState({
+      recognized: '√',
+    });
+  };
+
+  onSpeechResults(e) {
+    this.setState({
+      results: e.value,
+    });
+  }
+
+  async _startRecognition(e) {
+    this.setState({
+      recognized: '',
+      started: '',
+      results: [],
+    });
+    try {
+      await Voice.start('en-US');
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  render () {
+    return (
+      <View>
+        <Text style={styles.transcript}>
+            Transcript
+        </Text>
+        {this.state.results.map((result, index) => <Text style={styles.transcript}> {result}</Text>
+        )}
+        <Button style={styles.transcript}
+        onPress={this._startRecognition.bind(this)}
+        title="Start"></Button>
+      </View>
+    );
+  }
+}
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  transcript: {
+    textAlign: 'center',
+    color: '#B0171F',
+    marginBottom: 1,
+    top: '400%',
   },
 });
-
-export default App;
+*/

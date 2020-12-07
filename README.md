@@ -73,4 +73,4 @@ A first time user will enter the "First Time User" button. Once the user gets to
 
 ### Operation Instructions
 
-To test to see if the speaker can be identified, the user will hit the "Operation" button. Once the user gets to that new page, the user will press the record button and re-read the displayed statement outloud and then hit submit. The app will compare the K-coefficients to those in the .json database and if there is a match, the name of the user will pop-up, but if not, a pop-up saying, "No match" will be displayed.
+To test to see if the speaker can be identified, the user will hit the "Operation" button. Once the user gets to that new page, the microphone will be continuously on and be hearing for the displayed message to be read. Once it is read, the app will make . wav file. The app will compare the K-coefficients pulled form the .wav to those in the .json database and if there is a match, the name of the user will pop-up, but if not, a pop-up saying, "No match" will be displayed.

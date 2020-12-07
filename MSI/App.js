@@ -3,10 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
-import Voice from 'react-native-voice';
+import AudioRecorderPlayer, {AVEncoderAudioQualityIOSType, AVEncodingOption, AudioEncoderAndroidType, AudioSet, AudioSourceAndroidType,} 
+from 'react-native-audio-recorder-player';
+//import Voice from 'react-native-voice';
 
 
 const Tab = createBottomTabNavigator();
+
 export default class App extends Component {
   render () {
     return(
@@ -31,6 +34,26 @@ function homepage () {
 }
 
 class first_time_user extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggingIn: false,
+      recordSecs: 0,
+      recordTime: '00:00:00',
+      currentPostiionSec: 0,
+      currentDurationSec: 0,
+      playTime: '00:00:00',
+      duration: '00:00:00'
+    };
+    this.audioRecorderPlayer = new AudioRecorderPlayer();
+    this.audioRecorderPlayer.setSubscriptionDuration(0.09); //default is 0.1
+  }
+
+
+  
+}
+
+/*
   constructor(props) {
     super(props);
     this.state = {
@@ -102,3 +125,4 @@ const styles = StyleSheet.create({
     top: '400%',
   },
 });
+*/

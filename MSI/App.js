@@ -6,6 +6,7 @@
  * @flow strict-local
  */
 
+/*
 import React from 'react';
 import {
   SafeAreaView,
@@ -112,3 +113,107 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+*/
+import React, { Component } from 'react';
+import {StyleSheet, Text, View, Button,} from 'react-native';
+import Voice from 'react-native-voice';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
+
+const Tab = createBottomTabNavigator();
+export default class App extends Component {
+  render () {
+    return(
+    <NavigationContainer>
+      <Tab.Navigator initialRouteName = "Home">
+        <Tab.Screen name = "Home" component = {homepage}/>
+        <Tab.Screen name = "First Time User" component = {first_time_user}/>
+        <Tab.Screen name = "Official" component = {official}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+    );    
+  }
+}
+
+function homepage () {
+  return(
+    <View style = {{justifyContent: "center", alightItems: "center"}}>
+      <Text style = {{textAlignVertical: "top", textAlign: "center", fontSize: 30, color: "black"}}>
+        Multi-Speaker Indentification
+      </Text>
+    </View>
+  );
+}
+
+class first_time_user extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recognized: '',
+      started: '',
+      results: [],
+    };
+Voice.onSpeechStart = this.onSpeechStart.bind(this);
+    Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
+    Voice.onSpeechResults = this.onSpeechResults.bind(this);
+  }
+componentWillUnmount() {
+    Voice.destroy().then(Voice.removeAllListeners);
+  }
+onSpeechStart(e) {
+    this.setState({
+      started: '√',
+    });
+  };
+onSpeechRecognized(e) {
+    this.setState({
+      recognized: '√',
+    });
+  };
+onSpeechResults(e) {
+    this.setState({
+      results: e.value,
+    });
+  }
+async _startRecognition(e) {
+    this.setState({
+      recognized: '',
+      started: '',
+      results: [],
+    });
+    try {
+      await Voice.start('en-US');
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+
+
+render () {
+    return (
+      <View>
+        <Text style={styles.transcript}>
+            Transcript
+        </Text>
+        {this.state.results.map((result, index) => <Text style={styles.transcript}> {result}</Text>
+        )}
+        <Button style={styles.transcript} 
+        onPress={this._startRecognition.bind(this)}
+        title="Start"
+        style = {{flex: 0, alignItems: "center"}}>
+        </Button>
+      </View>
+    );
+  }
+}
+const styles = StyleSheet.create({
+  transcript: {
+    textAlign: 'center',
+    color: '#B0171F',
+    marginBottom: 1,
+    top: '400%',
+  },
+});

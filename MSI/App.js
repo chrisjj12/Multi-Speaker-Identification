@@ -49,6 +49,27 @@ class first_time_user extends React.Component {
     this.audioRecorderPlayer.setSubscriptionDuration(0.09); //default is 0.1
   }
 
+  start_recording = async() => {
+    const path = 'first_time.wav'
+    const AudioSet = {
+      AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
+      AudioSourceAndroid: AudioSourceAndroidType.MIC,
+      AVEncoderAudioQualityIOS: AVEncoderAudioQualityIOSType.high,
+      AVNumberofChannelsIOS: 2,
+      AVFormatIDIOS: AVEncodingOption.aac,
+    };
+    console.log('AudioSet', AudioSet);
+    const uri = await this.audioRecorderPlayer.startRecorder(path, AudioSet)
+    this.audioRecorderPlayer.addRecordBackListener((e) => {
+      this.setState({
+        recordSecs: e.current_position,
+        recordTime: this.audioRecorderPlayer.mmssss(
+          Math.floor(e.current_position),
+        ),
+      });
+    });
+    console.log(`uri: ${uri}`);
+  };
 
   
 }

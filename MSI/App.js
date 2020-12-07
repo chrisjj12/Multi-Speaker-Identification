@@ -139,8 +139,8 @@ export default class App extends Component {
 
 function homepage () {
   return(
-    <View style = {{justifyContent: "center", alightItems: "center"}}>
-      <Text style = {{textAlignVertical: "top", textAlign: "center", fontSize: 30, color: "black"}}>
+    <View style = {{flex: 1, justifyContent: "center", alignItems: "center"}}>
+      <Text style = {{textAlignVertical: "bottom", textAlign: "center", fontSize: 30, color: "black"}}>
         Multi-Speaker Indentification
       </Text>
     </View>

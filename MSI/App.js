@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
 import AudioRecorderPlayer, {AVEncoderAudioQualityIOSType, AVEncodingOption, AudioEncoderAndroidType, AudioSet, AudioSourceAndroidType,} 
 from 'react-native-audio-recorder-player';
+import { Card, Button, Divider } from 'react-native-paper';
 //import Voice from 'react-native-voice';
 
 
@@ -13,12 +14,12 @@ const Tab = createBottomTabNavigator();
 export default class App extends Component {
   render () {
     return(
-    <NavigationContainer>
-      <Tab.Navigator initialRouteName = "Home">
-        <Tab.Screen name = "Home" component = {homepage}/>
-        <Tab.Screen name = "First Time User" component = {first_time_user}/>
-      </Tab.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Tab.Navigator initialRouteName = "Home">
+          <Tab.Screen name = "Home" component = {homepage}/>
+          <Tab.Screen name = "First Time User" component = {first_time_user}/>
+        </Tab.Navigator>
+      </NavigationContainer>
     );    
   }
 }
@@ -101,11 +102,31 @@ class first_time_user extends React.Component {
       });
     });
   };
+
   playback_recording = async(e) => {
     console.log('playback_recording');
     this.audioRecorderPlayer.stopPlayer();
     this.audioRecorderPlayer.removePlayBackListener();
   };
+
+  render() {
+    return (
+      <Card style = {{flex: 1, flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center'}}>
+        <Button mode = "contained" icon="record" onPress = {() => this.start_recording()}>
+          RECORD
+        </Button>
+        <Button mode = "outlined" icon = "stop" onPress = {() => this.stop_recording()}>
+          STOP
+        </Button>
+        < Divider/>
+        <Title>
+          {this.state.playTime} / {this.state.duration}
+        </Title>
+        <
+      </Card>
+    )
+  }
+
 }
 
 /*

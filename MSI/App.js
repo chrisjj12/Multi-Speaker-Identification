@@ -71,6 +71,16 @@ class first_time_user extends React.Component {
     console.log(`uri: ${uri}`);
   };
 
+  stop_recording = async() => {
+    const result  = await this.audioRecorderPlayer.stopRecorder();
+    this.audioRecorderPlayer.removeRecordBackListener();
+    this.setState({
+      recordSecs: 0,
+    });
+    console.log(result);
+  };
+
+  
   
 }
 

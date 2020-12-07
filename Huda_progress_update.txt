@@ -6,12 +6,16 @@
 6. update diagram for new architecture
 7. Ran white noise in combination with a person's voice
 --> Uexpected result: noise was considered the signal and the signal was considered noise
---> Unexpected result: The output signal/noise .wav files came out to twice the length of the inputted signal --> due to incorrect data about the sampling frequencies
 --> Result: Noise was able to cancel some of the person's voice
 --> Result: The Voice was distinguishable but the white noise was not filtered out before or after the person's voice
 --> Result: still leakage of white noise --> try denoising model instead
-*** Need to incorporate resampling of data for when the two signals that need to be combined have different sample rates
+8. Incorporated Resampling for signals with different sampling frequencies
+
+
 To Do:
 - run my own voice with another voice and observe results
 - covert the ML model from MATLAB code to C code
 - swap input of ML model from .wav file stored in a location to new input from react native
+
+Problem Resolved:
+--> Unexpected result: The output signal/noise .wav files came out to twice the length of the inputted signal --> due to incorrect data about the sampling frequencies

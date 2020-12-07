@@ -34,8 +34,11 @@ function run_test_single_model
     %%
     index = 2;
     [speech, fs] = audioread(['wav', filesep, 'original_speech', num2str(index), '.wav']);
-    [noise, fs] = audioread(['wav', filesep, 'original_noise',num2str(index),'.wav']);
-
+    [noise, fs2] = audioread(['wav', filesep, 'original_noise',num2str(index),'.wav']);
+    
+    [P,Q] = rat(fs/fs2);
+    noise = resample(noise,P,Q);
+    
     x = speech + noise;    
     eI.fs = fs;
     %%

@@ -11,12 +11,12 @@ normalize = inline('x./max(abs(x)+1e-3)');
 
 for ieval=1:numel(eval_types)
 
-    [s1, fs]=audioread(['whitenoise_',eval_types{ieval},'.wav']);
-    [s2, fs]=audioread(['gettysburg_',eval_types{ieval},'.wav']);
+     [s1, fs]=audioread(['gettysburg_',eval_types{ieval},'.wav']);
+     [s2, fs]=audioread(['whitenoise_',eval_types{ieval},'.wav']);
    
     modelname=[modelname_in, '_', eval_types{ieval}];
 
-%%
+%
     maxLength=max([length(s1), length(s2)]);
     s1(end+1:maxLength)=eps;
     s2(end+1:maxLength)=eps;
@@ -25,7 +25,7 @@ for ieval=1:numel(eval_types)
     s2=s2./sqrt(sum(s2.^2));
 
     mixture=s1+s2;
-
+%      mixture = s1;
     winsize = eI.winsize;    nFFT = eI.nFFT;    hop = eI.hop;    scf=eI.scf; %scf = 2/3;
     windows=sin(0:pi/winsize:pi-pi/winsize);
 
@@ -96,7 +96,7 @@ for ieval=1:numel(eval_types)
     %% binary mask
     masksize=1;
     %   case 1 % binary mask + median filter
-    gain=1;
+    gain=2.0;
     m= double(abs(pred_source_signal)> (gain*abs(pred_source_noise)));
 
     source_signal =m .*spectrum.mix;
@@ -116,7 +116,7 @@ for ieval=1:numel(eval_types)
             end
            end
        else % finish at once
-        fprintf('%s %s iter:%d - binary mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
+       fprintf('%s %s iter:%d - binary mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
 
          if isfield(eI,'writewav') && eI.writewav==1
            if exist('stage','var')&& (strcmp(stage,'done')||strcmp(stage,'iter')) % not called by save_callback
@@ -127,7 +127,7 @@ for ieval=1:numel(eval_types)
      end
 
     %% softmask
-    gain=1;
+    gain=2.0;
     % m= double(abs(source_signal)> (gain*abs(source_noise)));
     m= double(abs(pred_source_signal)./(abs(pred_source_signal)+ (gain*abs(pred_source_noise))+eps));
 
@@ -149,7 +149,7 @@ for ieval=1:numel(eval_types)
             end
           end
     else % finish at once
-        fprintf('%s %s iter:%d - soft mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
+       fprintf('%s %s iter:%d - soft mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
 
         if isfield(eI,'writewav') && eI.writewav==1
            if exist('stage','var')&& (strcmp(stage,'done')||strcmp(stage,'iter')) % not called by save_callback

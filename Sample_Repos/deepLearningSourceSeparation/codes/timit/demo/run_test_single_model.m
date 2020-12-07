@@ -30,6 +30,7 @@ function run_test_single_model
     load([ModelPath, filesep, 'model_', num2str(j),'.mat']);
     eI.writewav=1;
     eI.bss3=1;
+    eI.dropout=1;
     eI.DataPath=[baseDir, filesep, 'codes', filesep, 'timit', ...
         filesep, 'Wavfile', filesep];
     eI.saveDir = [baseDir, filesep, 'codes', filesep, 'timit', ...

@@ -23,7 +23,7 @@ function run_test_single_model
     j=7650;
 
     % Load model
-    load model_RNN1_win1_h300_l2_r0_64ms_1000000_softabs_linearout_RELU_logmel_trn0_c1e-10_c0.001_bsz100000_miter10_bf50_c0_d0_7650.mat
+    load model_7650.mat
     eI.writewav=1;
     eI.bss3=1;
     eI.DataPath=[baseDir, filesep, 'codes', filesep, 'TSP', ...

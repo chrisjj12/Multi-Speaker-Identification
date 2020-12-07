@@ -17,13 +17,13 @@ function run_test_single_model
 
     ModelPath=[baseDir, filesep, 'codes',filesep,'denoising', filesep, 'demo'];
     
-    global SDR;
-    global SDR_bss3;
+%     global SDR;
+%     global SDR_bss3;
 
-    SDR.deviter=0;   SDR.devmax=0;   SDR.testmax=0;
-    SDR.devsar=0; SDR.devsir=0; SDR.testsar=0; SDR.testsir=0;
-    SDR_bss3.deviter=0;   SDR_bss3.devmax=0;   SDR_bss3.testmax=0;
-    SDR_bss3.devsar=0; SDR_bss3.devsir=0; SDR_bss3.testsar=0; SDR_bss3.testsir=0;
+%     SDR.deviter=0;   SDR.devmax=0;   SDR.testmax=0;
+%     SDR.devsar=0; SDR.devsir=0; SDR.testsar=0; SDR.testsir=0;
+%     SDR_bss3.deviter=0;   SDR_bss3.devmax=0;   SDR_bss3.testmax=0;
+%     SDR_bss3.devsar=0; SDR_bss3.devsir=0; SDR_bss3.testsar=0; SDR_bss3.testsir=0;
 
     j=870;
     
@@ -31,12 +31,37 @@ function run_test_single_model
     load([ModelPath, filesep, 'denoising_model_', num2str(j),'.mat']);
     eI.saveDir = [baseDir, filesep, 'codes', filesep, 'denoising', ...
         filesep, 'demo', filesep, 'results', filesep];
-    %%
-    index = 2;
-    [speech, fs] = audioread(['wav', filesep, 'original_speech', num2str(index), '.wav']);
-    [noise, fs] = audioread(['wav', filesep, 'original_noise',num2str(index),'.wav']);
+    %% 
+    % the commented out code below is for testing, if two known signals are
+    % desired to be combined for analysis
+    
+    %index = 2;
+    %[speech, fs] = audioread(['wav', filesep, 'original_speech', num2str(index), '.wav']);
+    %[speech, fsS] = audioread(['wav', filesep, 'original_speech', num2str(index), '.wav']);
 
-    x = speech + noise;    
+    %[noise, fs2] = audioread(['wav', filesep, 'original_noise',num2str(index),'.wav']);
+    %[noise, fsN] = audioread(['wav', filesep, 'street.wav']);
+% 
+%     [fs] = max([fsS fsN]);
+%     [Ps,Qs] = rat(fs/fsS);
+%     [Pn,Qn] = rat(fs/fsN);
+%     speech  = resample(speech,Ps,Qs);
+%     noise   = resample(noise,Pn,Qn);
+%     
+%     if(length(speech) ~= length(noise))
+%         [len, idx] = max([length(speech) length(noise)]);
+%          if idx == 1
+%             noise(end+1:length(speech)) = 0;
+%          else
+%             speech(end+1:length(noise)) = 0;
+%          end
+%     end
+%     
+%     x = speech + noise; 
+    
+    [speech, fs] = audioread(['wav', filesep, 'original_speech', num2str(index), '.wav']);
+
+    x = speech;
     eI.fs = fs;
     %%
     output = test_denoising_general_kl_bss3(x', theta, eI, 'testall', 0);
@@ -49,8 +74,8 @@ function run_test_single_model
     wav_noise = wav_noise./max(abs(wav_noise));    
 
     audiowrite([eI.saveDir, filesep,'separated_speech',num2str(index),'.wav'], wav_singal, fs);
-    audiowrite([eI.saveDir, filesep,'separated_noise',num2str(index),'.wav'], wav_noise, fs);
+    %audiowrite([eI.saveDir, filesep,'separated_noise',num2str(index),'.wav'], wav_noise, fs);
     
     % Get separation stats
-    [sdr,sir,sar,stoi] = sep_perf(wav_singal, [speech'; noise'], fs);    
+    %[sdr,sir,sar,stoi] = sep_perf(wav_singal, [speech'; noise'], fs);    
 end

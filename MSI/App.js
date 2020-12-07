@@ -125,10 +125,10 @@ class first_time_user extends React.Component {
   render() {
     return (
       <Card style = {{flex: 1, flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center'}}>
-        <Title>
+        <Title style = {{flexDirection: 'row'}}>
           {this.state.recordTime}
         </Title>
-        <Button mode = "contained"  onPress = {() => this.start_recording()}>
+        <Button mode = "contained" onPress = {() => this.start_recording()}>
           RECORD
         </Button>
         <Button mode = "outlined"  onPress = {() => this.stop_recording()}>
@@ -146,8 +146,8 @@ class first_time_user extends React.Component {
         </Button>
         <View style = {{marginBottom: 100}}>
         </View>
-        <Button mode = "outlined">
-          <Text style = {{color: 'green'}}>
+        <Button style = {{height: 80, backgroundColor: 'green'}}>
+          <Text style = {{color: 'white', fontSize: 50}}>
             SUBMIT
           </Text>
         </Button>

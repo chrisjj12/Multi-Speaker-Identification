@@ -18,10 +18,10 @@ function run_test_single_model
 
     ModelPath=[baseDir, filesep, 'codes', filesep, 'timit', filesep, 'demo'];
 
-    global SDR;
+%    global SDR;
 
-    SDR.deviter=0;   SDR.devmax=0;   SDR.testmax=0;
-    SDR.devsar=0; SDR.devsir=0; SDR.testsar=0; SDR.testsir=0;
+%     SDR.deviter=0;   SDR.devmax=0;   SDR.testmax=0;
+%     SDR.devsar=0; SDR.devsir=0; SDR.testsar=0; SDR.testsir=0;
 
   j=70;
 %     j=14940;

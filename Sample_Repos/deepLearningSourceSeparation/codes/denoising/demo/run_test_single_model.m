@@ -35,12 +35,9 @@ function run_test_single_model
     % the commented out code below is for testing, if two known signals are
     % desired to be combined for analysis
     
-    %index = 2;
-    %[speech, fs] = audioread(['wav', filesep, 'original_speech', num2str(index), '.wav']);
-    %[speech, fsS] = audioread(['wav', filesep, 'original_speech', num2str(index), '.wav']);
-
-    %[noise, fs2] = audioread(['wav', filesep, 'original_noise',num2str(index),'.wav']);
-    %[noise, fsN] = audioread(['wav', filesep, 'street.wav']);
+%     [speech, fsS] = audioread(['wav', filesep, 'gettysburg_test.wav']);
+% 
+%     [noise, fsN] = audioread(['wav', filesep, 'whitenoise_test.wav']);
 % 
 %     [fs] = max([fsS fsN]);
 %     [Ps,Qs] = rat(fs/fsS);
@@ -59,7 +56,7 @@ function run_test_single_model
 %     
 %     x = speech + noise; 
     
-    [speech, fs] = audioread(['wav', filesep, 'original_speech', num2str(index), '.wav']);
+    [speech, fs] = audioread(['wav', filesep, 'audio.wav']);
 
     x = speech;
     eI.fs = fs;
@@ -73,7 +70,7 @@ function run_test_single_model
     wav_singal = wav_singal./max(abs(wav_singal));
     wav_noise = wav_noise./max(abs(wav_noise));    
 
-    audiowrite([eI.saveDir, filesep,'separated_speech',num2str(index),'.wav'], wav_singal, fs);
+    audiowrite([eI.saveDir, filesep,'audio_denoised.wav'], wav_singal, fs);
     %audiowrite([eI.saveDir, filesep,'separated_noise',num2str(index),'.wav'], wav_noise, fs);
     
     % Get separation stats

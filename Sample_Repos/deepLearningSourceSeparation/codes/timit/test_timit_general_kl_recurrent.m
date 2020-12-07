@@ -11,20 +11,32 @@ normalize = inline('x./max(abs(x)+1e-3)');
 
 for ieval=1:numel(eval_types)
 
-     [s1, fs]=audioread(['gettysburg_',eval_types{ieval},'.wav']);
-     [s2, fs]=audioread(['whitenoise_',eval_types{ieval},'.wav']);
-   
-    modelname=[modelname_in, '_', eval_types{ieval}];
+%      [s1, fsS]=audioread(['gettysburg_',eval_types{ieval},'.wav']);
+%      [s2, fsN]=audioread(['whitenoise_',eval_types{ieval},'.wav']);
 
-%
-    maxLength=max([length(s1), length(s2)]);
-    s1(end+1:maxLength)=eps;
-    s2(end+1:maxLength)=eps;
+    modelname=[modelname_in, '_', eval_types{ieval}];
+    
+        [fs] = max([fsS fsN]);
+    [Ps,Qs] = rat(fs/fsS);
+    [Pn,Qn] = rat(fs/fsN);
+    s1  = resample(s1,Ps,Qs);
+    s2   = resample(s2,Pn,Qn);
+    
+    if(length(s1) ~= length(s2))
+        [len, idx] = max([length(s1) length(s2)]);
+         if idx == 1
+            s2(end+1:length(s1)) = 0;
+         else
+            s1(end+1:length(s2)) = 0;
+         end
+    end
 
     s1=s1./sqrt(sum(s1.^2));
     s2=s2./sqrt(sum(s2.^2));
 
     mixture=s1+s2;
+    
+    [s1, fs]=audioread(['gettysburg_',eval_types{ieval},'.wav']);
 %      mixture = s1;
     winsize = eI.winsize;    nFFT = eI.nFFT;    hop = eI.hop;    scf=eI.scf; %scf = 2/3;
     windows=sin(0:pi/winsize:pi-pi/winsize);
@@ -72,7 +84,7 @@ for ieval=1:numel(eval_types)
     wavout_signal = istft(source_signal, nFFT ,windows, hop)';
 
     %  BSS_EVAL ( wav_truth_signal, wav_truth_noise, wav_pred_signal, wav_pred_noise, wav_mix )
-    Parms =  BSS_EVAL ( s1, s2, wavout_signal, wavout_noise, mixture );
+    %Parms =  BSS_EVAL ( s1, s2, wavout_signal, wavout_noise, mixture );
     if isfield(eI,'ioffset'),
     fprintf('%s %s ioffset:%d iter:%d - no mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, eI.ioffset, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
        if isfield(eI,'writewav') && eI.writewav==1
@@ -82,7 +94,7 @@ for ieval=1:numel(eval_types)
         end
        end
     else % finish at once
-    fprintf('%s %s iter:%d - no mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
+    %fprintf('%s %s iter:%d - no mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
 
      if isfield(eI,'writewav') && eI.writewav==1
        if exist('stage','var')&& (strcmp(stage,'done')||strcmp(stage,'iter')) % not called by save_callback
@@ -105,7 +117,7 @@ for ieval=1:numel(eval_types)
     wavout_noise = istft(source_noise, nFFT ,windows, hop)';
     wavout_signal = istft(source_signal, nFFT ,windows, hop)';
 
-    Parms =  BSS_EVAL ( s1, s2, wavout_signal, wavout_noise, mixture );
+    %Parms =  BSS_EVAL ( s1, s2, wavout_signal, wavout_noise, mixture );
 
      if isfield(eI,'ioffset'),
         fprintf('%s %s ioffset:%d iter:%d - binary mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, eI.ioffset, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
@@ -115,8 +127,8 @@ for ieval=1:numel(eval_types)
                 audiowrite([eI.saveDir,modelname,'_ioff',num2str(eI.ioffset),'_bmask_source_signal.wav'], normalize(wavout_signal), fs);
             end
            end
-       else % finish at once
-       fprintf('%s %s iter:%d - binary mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
+     else % finish at once
+%        fprintf('%s %s iter:%d - binary mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
 
          if isfield(eI,'writewav') && eI.writewav==1
            if exist('stage','var')&& (strcmp(stage,'done')||strcmp(stage,'iter')) % not called by save_callback
@@ -137,7 +149,7 @@ for ieval=1:numel(eval_types)
     wavout_noise = istft(source_noise, nFFT ,windows, hop)';
     wavout_signal = istft(source_signal, nFFT ,windows, hop)';
 
-    Parms =  BSS_EVAL ( s1, s2, wavout_signal, wavout_noise, mixture );
+    %Parms =  BSS_EVAL ( s1, s2, wavout_signal, wavout_noise, mixture );
 
     if isfield(eI,'ioffset'),
         fprintf('%s %s ioffset:%d iter:%d - soft mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, eI.ioffset, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
@@ -149,7 +161,7 @@ for ieval=1:numel(eval_types)
             end
           end
     else % finish at once
-       fprintf('%s %s iter:%d - soft mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
+       %fprintf('%s %s iter:%d - soft mask - \tSDR:%.3f\tSIR:%.3f\tSAR:%.3f\tNSDR:%.3f\n', modelname, stage, iter, Parms.SDR, Parms.SIR, Parms.SAR, Parms.NSDR);
 
         if isfield(eI,'writewav') && eI.writewav==1
            if exist('stage','var')&& (strcmp(stage,'done')||strcmp(stage,'iter')) % not called by save_callback
@@ -160,17 +172,17 @@ for ieval=1:numel(eval_types)
     end
 
     %% record max dev soft SDR: dev/test SDR, iter
-    global SDR;
-    if ieval==1
-        if Parms.SDR> SDR.devmax
-            SDR.devmax=Parms.SDR;
-            SDR.deviter=iter;
-        end
-    else
-        if SDR.deviter==iter
-            SDR.testmax=Parms.SDR;
-        end
-    end
+%     global SDR;
+%     if ieval==1
+%         if Parms.SDR> SDR.devmax
+%             SDR.devmax=Parms.SDR;
+%             SDR.deviter=iter;
+%         end
+%     else
+%         if SDR.deviter==iter
+%             SDR.testmax=Parms.SDR;
+%         end
+%     end
 end % eval_type -dev test
 
 return;

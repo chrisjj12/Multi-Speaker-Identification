@@ -80,8 +80,8 @@ class first_time_user extends React.Component {
     console.log(result);
   };
 
-  play_recording = async() => {
-    console.log('play_recording');
+  playback_recording = async(e) => {
+    console.log('playback_recording');
     const path = 'first_time.wav'
     const msg = await this.audioRecorderPlayer.startPlayer(path);
     this.audioRecorderPlayer.setVolume(1.0);
@@ -100,6 +100,11 @@ class first_time_user extends React.Component {
         duration: this.audioRecorderPlayer.mmssss(Math.floor(e.duration)),
       });
     });
+  };
+  playback_recording = async(e) => {
+    console.log('playback_recording');
+    this.audioRecorderPlayer.stopPlayer();
+    this.audioRecorderPlayer.removePlayBackListener();
   };
 }
 

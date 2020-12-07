@@ -144,6 +144,11 @@ class first_time_user extends React.Component {
         <Button mode = "outlined"  onPress = {() => this.stop_playback_recording()}>
           STOP
         </Button>
+        <Button mode = "outlined">
+          <Text style = {{color: 'green'}}>
+            SUBMIT
+          </Text>
+        </Button>
       </Card>
     )
   }

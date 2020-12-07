@@ -114,12 +114,13 @@ const styles = StyleSheet.create({
 
 export default App;
 */
+
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button,} from 'react-native';
 import Voice from 'react-native-voice';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 
 
 const Tab = createBottomTabNavigator();
@@ -130,7 +131,6 @@ export default class App extends Component {
       <Tab.Navigator initialRouteName = "Home">
         <Tab.Screen name = "Home" component = {homepage}/>
         <Tab.Screen name = "First Time User" component = {first_time_user}/>
-        <Tab.Screen name = "Official" component = {official}/>
       </Tab.Navigator>
     </NavigationContainer>
     );    
@@ -155,29 +155,35 @@ class first_time_user extends React.Component {
       started: '',
       results: [],
     };
-Voice.onSpeechStart = this.onSpeechStart.bind(this);
+
+    Voice.onSpeechStart = this.onSpeechStart.bind(this);
     Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
     Voice.onSpeechResults = this.onSpeechResults.bind(this);
   }
-componentWillUnmount() {
+
+  componentWillUnmount() {
     Voice.destroy().then(Voice.removeAllListeners);
   }
-onSpeechStart(e) {
+
+  onSpeechStart(e) {
     this.setState({
       started: '√',
     });
   };
-onSpeechRecognized(e) {
+
+  onSpeechRecognized(e) {
     this.setState({
       recognized: '√',
     });
   };
-onSpeechResults(e) {
+
+  onSpeechResults(e) {
     this.setState({
       results: e.value,
     });
   }
-async _startRecognition(e) {
+
+  async _startRecognition(e) {
     this.setState({
       recognized: '',
       started: '',
@@ -190,9 +196,7 @@ async _startRecognition(e) {
     }
   }
 
-
-
-render () {
+  render () {
     return (
       <View>
         <Text style={styles.transcript}>
@@ -200,11 +204,9 @@ render () {
         </Text>
         {this.state.results.map((result, index) => <Text style={styles.transcript}> {result}</Text>
         )}
-        <Button style={styles.transcript} 
+        <Button style={styles.transcript}
         onPress={this._startRecognition.bind(this)}
-        title="Start"
-        style = {{flex: 0, alignItems: "center"}}>
-        </Button>
+        title="Start"></Button>
       </View>
     );
   }

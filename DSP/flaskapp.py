@@ -3,8 +3,8 @@ app = Flask(__name__)
     
 
 @app.route('/dsp')
-def hello_world():
-    return 'DSP'
+def dsp():
+    return "DSP"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)

@@ -17,6 +17,8 @@
     "react-native": "0.63.3",
     "react-native-audio-recorder-player": "^2.6.0",
     "react-native-cards": "^1.1.4",
+    "react-native-file-download": "0.0.10",
+    "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-paper": "^4.4.1",
     "react-native-reanimated": "^1.13.2",

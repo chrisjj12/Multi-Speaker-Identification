@@ -6,6 +6,7 @@ import {Text, View,} from 'react-native';
 import AudioRecorderPlayer, {AVEncoderAudioQualityIOSType, AVEncodingOption, AudioSet, AudioEncoderAndroidType, AudioSourceAndroidType} 
 from 'react-native-audio-recorder-player';
 import { Card, Divider, Button, Title } from 'react-native-paper';
+//import com.rnfs.RNFSPackage; 
 
 //import Voice from 'react-native-voice';
 
@@ -122,10 +123,39 @@ class first_time_user extends React.Component {
     this.audioRecorderPlayer.removePlayBackListener();
   };
 
+  create_file = async(e) => {
+    const path = 'hello.m4a'
+    const URL = '/Users/chrisjung/Documents/School/GradSchool/EC601/Multi-Speaker-Identification/MSI'
+    const headers = {
+      'Accept-Language': 'en-US'
+    }
+    const file = await this.audioRecorderPlayer.FileDownload.download(URL, path, headers)
+    .then((response) => {
+      console.log
+    } 
+    console.log(file);
+    
+    const DEST = RNFS.DocumentDirectoryPath
+    const fileName = 'hello.m4a'
+    
+
+    FileDownload.addListener(URL, (info) => {
+      console.log(`complete ${(info.totalBytesWritten / info.totalBytesExpectedToWrite * 100)}%`);
+    });
+
+    FileDownload.download(URL, DEST, fileName, headers)
+    .then((response) => {
+      console.log(`downloaded! file saved to: ${response}`)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
   render() {
     return (
       <Card style = {{flex: 1, flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center'}}>
-        <Title style = {{flexDirection: 'row'}}>
+        <Title style = {{Title: 'centered'}}>
           {this.state.recordTime}
         </Title>
         <Button mode = "contained" onPress = {() => this.start_recording()}>
@@ -146,7 +176,7 @@ class first_time_user extends React.Component {
         </Button>
         <View style = {{marginBottom: 100}}>
         </View>
-        <Button style = {{height: 80, backgroundColor: 'green'}}>
+        <Button style = {{height: 80, backgroundColor: 'green'}} onPress = {() => this.create_file()}>
           <Text style = {{color: 'white', fontSize: 50}}>
             SUBMIT
           </Text>

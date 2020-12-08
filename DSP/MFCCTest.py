@@ -6,13 +6,14 @@ from flask import Flask, render_template, request, send_file
 import json
 import scipy.io.wavfile as wav
 
-app = Flask(__name__, template_folder = "Templates")
-file_name = "kcoeff.json"
+app = Flask(__name__)
+#file_name = "kcoeff.json"
 
 @app.route('/')
-def dsp():
 
-    return render_template('main.html')
+#def dsp():
+
+ #   return render_template('main.html')
 
 
 

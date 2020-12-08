@@ -46,19 +46,19 @@ if __name__ == "__main__":
 #course_list = list(client.db.course_col.find({"major": major.upper()}))
  #   return flask.jsonify(**course_list)
 """
-#from datetime import datetime
+from datetime import datetime
 from flask import Flask, request
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 
 app = Flask(__name__)
 FlaskJSON(app)
 
-"""
+
 @app.route('/get_time')
 def get_time():
     now = datetime.utcnow()
     return json_response(time=now)
-"""
+
 
 @app.route('/increment_value', methods=['POST'])
 def increment_value():

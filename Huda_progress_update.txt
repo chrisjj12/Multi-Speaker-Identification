@@ -5,17 +5,20 @@
 5. Playing with speech separtion model code to understand what it does with the wav files
 6. update diagram for new architecture
 7. Ran white noise in combination with a person's voice
---> Uexpected result: noise was considered the signal and the signal was considered noise
 --> Result: Noise was able to cancel some of the person's voice
 --> Result: The Voice was distinguishable but the white noise was not filtered out before or after the person's voice
 --> Result: still leakage of white noise --> try denoising model instead
 8. Incorporated Resampling for signals with different sampling frequencies
-9.  swap input of ML model from .wav file stored in a location (2 .wav files) to new input from react native (a signle .wav file)
-10. changed output to be a single output .wav file
+9.  Swaped input of ML model from .wav file stored in a location (2 .wav files) to new input from react native (a signle .wav file)
+10. Changed output to be a single output .wav file
+11. had output of denoiser feed into input of speech separator seemlessly
 
 To Do:
 - run my own voice with another voice and observe results
-- covert the ML model from MATLAB code to C code
 
 Problem Resolved:
 --> Unexpected result: The output signal/noise .wav files came out to twice the length of the inputted signal --> due to incorrect data about the sampling frequencies
+--> Uexpected result: noise was considered the signal and the signal was considered noise --> This was do to the fact that the white noise signal was double in magnitude of the signal
+--> Uexpected result: noise was considered the signal and the signal was considered noise --> This was do to the fact that the white noise signal was double in magnitude of the signal
+PROBLEM:
+- covert the ML model from MATLAB code to C code --> could not convert to C code because MATLAB Coder is not given to students

@@ -3,11 +3,13 @@ from MFCC import mfcc
 from MFCC import delta
 from MFCC import logfbank
 from flask import Flask, render_template, request, send_file, jsonify
+from flask_json import FlaskJSON, JsonError, json_response, as_json
 import json
 import scipy.io.wavfile as wav
 
 
 app = Flask(__name__)
+json = FlaskJSON(app)
 #file_name = "kcoeff.json"
 
 @app.route('/')
@@ -24,10 +26,11 @@ def dsp():
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 
     python_arr = fbank_feat[1:3,:]
-    main = python_arr.tolist()
+    database_format = python_arr.tolist()
+    database_format = json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application
+    return flask.jsonify(**database_format)
 
 
-#database_format = json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application
 #print(json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application
 
 #print(database_format)

@@ -25,7 +25,7 @@ def create_json():
     python_arr = fbank_feat[1:3,:]
     json_conv = json.dumps(python_arr)
 
-    return render_template('main.html',json_conv=json_conv)
+    return render_template('main.html',main=json_conv)
 
 
 if __name__ == "__main__":

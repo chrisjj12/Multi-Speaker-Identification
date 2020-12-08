@@ -19,12 +19,12 @@ def dsp():
 
 
 #def create_json():
-(rate,sig) = wav.read("english.wav")
-mfcc_feat = mfcc(sig, rate)
-d_mfcc_feat = delta(mfcc_feat, 2)
-fbank_feat = logfbank(sig, rate) 
-python_arr = fbank_feat[1:3,:]
-main = python_arr.tolist()
+    (rate,sig) = wav.read("english.wav")
+    mfcc_feat = mfcc(sig, rate)
+    d_mfcc_feat = delta(mfcc_feat, 2)
+    fbank_feat = logfbank(sig, rate) 
+    python_arr = fbank_feat[1:3,:]
+    main = python_arr.tolist()
 
 
 #database_format = json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application

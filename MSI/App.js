@@ -2,10 +2,12 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Button,} from 'react-native';
-import AudioRecorderPlayer, {AVEncoderAudioQualityIOSType, AVEncodingOption, AudioEncoderAndroidType, AudioSet, AudioSourceAndroidType,} 
+import {Text, View,} from 'react-native';
+import AudioRecorderPlayer, {AVEncoderAudioQualityIOSType, AVEncodingOption, AudioSet, AudioEncoderAndroidType, AudioSourceAndroidType} 
 from 'react-native-audio-recorder-player';
-import { Card, Button, Divider } from 'react-native-paper';
+import { Card, Divider, Button, Title } from 'react-native-paper';
+//import com.rnfs.RNFSPackage; 
+
 //import Voice from 'react-native-voice';
 
 
@@ -51,7 +53,13 @@ class first_time_user extends React.Component {
   }
 
   start_recording = async() => {
-    const path = 'first_time.wav'
+    /*
+    const path = Platform.select({
+      ios: 'first_time.wav',
+      android: 'sdcard/first_time.wav', // should give extra dir name in android. Won't grant permission to the first level of dir.
+    });*/
+    const path = 'hello.m4a';
+    //const uri = await audioRecorderPlayer.startRecord(path);
     const AudioSet = {
       AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
       AudioSourceAndroid: AudioSourceAndroidType.MIC,
@@ -83,7 +91,13 @@ class first_time_user extends React.Component {
 
   playback_recording = async(e) => {
     console.log('playback_recording');
-    const path = 'first_time.wav'
+    /*
+    const path = Platform.select({
+      ios: 'first_time.wav',
+      android: 'sdcard/first_time.wav', // should give extra dir name in android. Won't grant permission to the first level of dir.
+    });
+    */
+    const path = 'hello.m4a';
     const msg = await this.audioRecorderPlayer.startPlayer(path);
     this.audioRecorderPlayer.setVolume(1.0);
     console.log(msg);
@@ -109,30 +123,69 @@ class first_time_user extends React.Component {
     this.audioRecorderPlayer.removePlayBackListener();
   };
 
+  create_file = async(e) => {
+    const path = 'hello.m4a'
+    const URL = '/Users/chrisjung/Documents/School/GradSchool/EC601/Multi-Speaker-Identification/MSI'
+    const headers = {
+      'Accept-Language': 'en-US'
+    }
+    const file = await this.audioRecorderPlayer.FileDownload.download(URL, path, headers)
+    .then((response) => {
+      console.log
+    } 
+    console.log(file);
+    
+    const DEST = RNFS.DocumentDirectoryPath
+    const fileName = 'hello.m4a'
+    
+
+    FileDownload.addListener(URL, (info) => {
+      console.log(`complete ${(info.totalBytesWritten / info.totalBytesExpectedToWrite * 100)}%`);
+    });
+
+    FileDownload.download(URL, DEST, fileName, headers)
+    .then((response) => {
+      console.log(`downloaded! file saved to: ${response}`)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
   render() {
     return (
       <Card style = {{flex: 1, flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center'}}>
-        <Button mode = "contained" icon="record" onPress = {() => this.start_recording()}>
+        <Title style = {{Title: 'centered'}}>
+          {this.state.recordTime}
+        </Title>
+        <Button mode = "contained" onPress = {() => this.start_recording()}>
           RECORD
         </Button>
-        <Button mode = "outlined" icon = "stop" onPress = {() => this.stop_recording()}>
+        <Button mode = "outlined"  onPress = {() => this.stop_recording()}>
           STOP
         </Button>
         < Divider/>
         <Title>
           {this.state.playTime} / {this.state.duration}
         </Title>
-        <Button mode = "contained" icon = "play" onPress = {() => this.playback_recording()}>
+        <Button mode = "contained"  onPress = {() => this.playback_recording()}>
           PLAY
         </Button>
-        <Button mode = "outlined" icon = "stop" onPress = {() => this.stop_playback_recording()}>
+        <Button mode = "outlined"  onPress = {() => this.stop_playback_recording()}>
           STOP
+        </Button>
+        <View style = {{marginBottom: 100}}>
+        </View>
+        <Button style = {{height: 80, backgroundColor: 'green'}} onPress = {() => this.create_file()}>
+          <Text style = {{color: 'white', fontSize: 50}}>
+            SUBMIT
+          </Text>
         </Button>
       </Card>
     )
   }
-
 }
+
 
 /*
   constructor(props) {

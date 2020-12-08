@@ -14,13 +14,15 @@ def dsp():
 
     return render_template('main.html')
 
-@app.route('/', methods = ["POST"])
+
+
 def create_json():
     (rate,sig) = wav.read("english.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate)
-    json_conv = json.dumps(fbank_feat)
+    python_arr = fbank_feat[1:3,:]
+    json_conv = json.dumps(python_arr)
 
     return json_conv
 

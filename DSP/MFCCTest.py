@@ -27,7 +27,7 @@ def dsp():
     fbank_feat = logfbank(sig, rate) 
     python_arr = fbank_feat[1:3,:]
     database_format = python_arr.tolist()
-    database_format = json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application
+    database_format = json.dumps({"Name": json_conv}) # Need to change to the user inputed name in the application
     return flask.jsonify(**database_format)
 
 

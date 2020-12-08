@@ -14,7 +14,7 @@ fbank_feat = logfbank(sig, rate)
 
 @app.route('/')
 def dsp():
-    return fbank_feat[1:3,:]
+    return render_template('main.html')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)

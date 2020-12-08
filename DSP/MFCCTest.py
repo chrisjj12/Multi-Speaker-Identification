@@ -15,7 +15,7 @@ def dsp():
     return render_template('main.html')
 
 @app.route('/', methods = ["POST"])
-def create_json/
+def create_json
     (rate,sig) = wav.read("english.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)

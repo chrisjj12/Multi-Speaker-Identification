@@ -3,12 +3,14 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+    {% for db in dblist %}
+    <p>{{ db }} </p>
+{% endfor %}
     <label id = "dblist" style="width:200px"> 
     </label>
 <script>
     var pydata = {{dblist | tojson}};
-    document.getElementById("dblist").innerHTML = pydata
+    //document.getElementById("dblist").innerHTML = pydata
 </script>
 
 </body>

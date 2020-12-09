@@ -28,7 +28,7 @@ def create_json():
     sound = AudioSegment.from_file(src, "aac")
     sound.export(dst, format="wav")
     """
-    (rate,sig) = wav.read("hello.m4a")
+    (rate,sig) = wav.read("hello.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 

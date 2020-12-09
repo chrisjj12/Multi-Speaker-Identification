@@ -8,7 +8,7 @@ import json
 import scipy.io.wavfile as wav
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="Templates")
 FlaskJSON(app)
 #file_name = "kcoeff.json"
 

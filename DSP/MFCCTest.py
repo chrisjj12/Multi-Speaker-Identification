@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-"""
 from MFCC import mfcc
 from MFCC import delta
 from MFCC import logfbank
@@ -15,27 +14,25 @@ FlaskJSON(app)
 
 @app.route('/')
 
-def dsp():
-
     #return render_template('main.html')
 
 
 
-#def create_json():
+def create_json():
     (rate,sig) = wav.read("english.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 
     python_arr = fbank_feat[1:3,:]
-    main = python_arr.tolist()
+    json_conv = python_arr.tolist()
+    database_format = json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application
 
 
-#database_format = json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application
 #print(json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application
 
 #print(database_format)
 
-    return render_template('main.html',main=main)
+    return render_template('main.html', dblist =  database_format)
 
 
 if __name__ == "__main__":
@@ -45,6 +42,7 @@ if __name__ == "__main__":
 
 #course_list = list(client.db.course_col.find({"major": major.upper()}))
  #   return flask.jsonify(**course_list)
+
 """
 from datetime import datetime
 from flask import Flask, request
@@ -79,3 +77,4 @@ def get_value():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
+"""

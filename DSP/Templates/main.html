@@ -8,10 +8,7 @@
     </label>
 <script>
     var pydata = {{dblist | tojson}};
-    document.getElementById("dblist").innerHTML = pydata
-    //{% for db in dblist %}
-    //<p>{{ db }} </p>
-    //{% endfor %}
+    document.getElementById("dblist").innerHTML = pydata[0]
 </script>
 
 </body>

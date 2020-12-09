@@ -17,16 +17,16 @@ FlaskJSON(app)
 @app.route('/')
 
 def create_json():
-    """
+    
     src = open(os.path.join("/Users/chrisjung/Downloads", "hello.m4a"))
     dst = "test.wav"
 
 
     # convert wav to mp3                                                            
     sound = AudioSegment.from_file(src, "aac")
-    sound.export(dst, format="wav")
-    """
-    (rate,sig) = wav.read("hello.wav")
+    wavfile = sound.export(dst, format="wav")
+    
+    (rate,sig) = wav.read(wavfile)
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 

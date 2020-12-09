@@ -58,16 +58,19 @@ class first_time_user extends React.Component {
       ios: 'first_time.wav',
       android: 'sdcard/first_time.wav', // should give extra dir name in android. Won't grant permission to the first level of dir.
     });*/
+    /*
     const path = Platform.select({
-      ios: 'hello.wav'
+      ios: 'hello.wav' //wav
     }) 
+    */
+    const path = 'hello.m4a';
     //const uri = await audioRecorderPlayer.startRecord(path);
     const AudioSet = {
-      AudioEncoderAndroid: AudioEncoderAndroidType.PC,
+      AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
       AudioSourceAndroid: AudioSourceAndroidType.MIC,
       AVEncoderAudioQualityIOS: AVEncoderAudioQualityIOSType.high,
       AVNumberofChannelsIOS: 2,
-      AVFormatIDIOS: AVEncodingOption.lpcm,
+      AVFormatIDIOS: AVEncodingOption.aac,
     };
     console.log('AudioSet', AudioSet);
     const uri = await this.audioRecorderPlayer.startRecorder(path, AudioSet)
@@ -99,7 +102,7 @@ class first_time_user extends React.Component {
       android: 'sdcard/first_time.wav', // should give extra dir name in android. Won't grant permission to the first level of dir.
     });
     */
-    const path = 'hello.wav';
+    const path = 'hello.m4a';
     const msg = await this.audioRecorderPlayer.startPlayer(path);
     this.audioRecorderPlayer.setVolume(1.0);
     console.log(msg);

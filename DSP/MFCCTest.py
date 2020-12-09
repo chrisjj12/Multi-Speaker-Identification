@@ -32,7 +32,7 @@ def create_json():
 
 #print(database_format)
 
-    return render_template('main.html', dblist =  json_conv)
+    return render_template('main.html', dblist =  database_format)
 
 
 if __name__ == "__main__":

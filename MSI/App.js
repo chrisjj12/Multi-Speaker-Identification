@@ -58,14 +58,16 @@ class first_time_user extends React.Component {
       ios: 'first_time.wav',
       android: 'sdcard/first_time.wav', // should give extra dir name in android. Won't grant permission to the first level of dir.
     });*/
-    const path = 'hello.m4a';
+    const path = Platform.select({
+      ios: 'hello.wav'
+    }) 
     //const uri = await audioRecorderPlayer.startRecord(path);
     const AudioSet = {
-      AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
+      AudioEncoderAndroid: AudioEncoderAndroidType.PC,
       AudioSourceAndroid: AudioSourceAndroidType.MIC,
       AVEncoderAudioQualityIOS: AVEncoderAudioQualityIOSType.high,
       AVNumberofChannelsIOS: 2,
-      AVFormatIDIOS: AVEncodingOption.aac,
+      AVFormatIDIOS: AVEncodingOption.lpcm,
     };
     console.log('AudioSet', AudioSet);
     const uri = await this.audioRecorderPlayer.startRecorder(path, AudioSet)
@@ -97,7 +99,7 @@ class first_time_user extends React.Component {
       android: 'sdcard/first_time.wav', // should give extra dir name in android. Won't grant permission to the first level of dir.
     });
     */
-    const path = 'hello.m4a';
+    const path = 'hello.wav';
     const msg = await this.audioRecorderPlayer.startPlayer(path);
     this.audioRecorderPlayer.setVolume(1.0);
     console.log(msg);
@@ -122,35 +124,6 @@ class first_time_user extends React.Component {
     this.audioRecorderPlayer.stopPlayer();
     this.audioRecorderPlayer.removePlayBackListener();
   };
-
-  create_file = async(e) => {
-    const path = 'hello.m4a'
-    const URL = '/Users/chrisjung/Documents/School/GradSchool/EC601/Multi-Speaker-Identification/MSI'
-    const headers = {
-      'Accept-Language': 'en-US'
-    }
-    const file = await this.audioRecorderPlayer.FileDownload.download(URL, path, headers)
-    .then((response) => {
-      console.log
-    } 
-    console.log(file);
-    
-    const DEST = RNFS.DocumentDirectoryPath
-    const fileName = 'hello.m4a'
-    
-
-    FileDownload.addListener(URL, (info) => {
-      console.log(`complete ${(info.totalBytesWritten / info.totalBytesExpectedToWrite * 100)}%`);
-    });
-
-    FileDownload.download(URL, DEST, fileName, headers)
-    .then((response) => {
-      console.log(`downloaded! file saved to: ${response}`)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
 
   render() {
     return (

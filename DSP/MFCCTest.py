@@ -30,6 +30,7 @@ def create_json():
 
 
     return render_template('main.html', dblist =  database_format)
+    f.close()
 
 f.close()
 

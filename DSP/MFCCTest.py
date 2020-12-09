@@ -24,6 +24,7 @@ def create_json():
     python_arr = fbank_feat[1:3,:]
     json_conv = python_arr.tolist()
     database_format = json.dumps({"Name": json_conv}) # Need to change to the user inputed name in the application
+    f= open("kcoeff.txt","a+")
     for i in range(2):
         f.write(database_format[i])
 

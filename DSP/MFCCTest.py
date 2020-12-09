@@ -17,7 +17,7 @@ FlaskJSON(app)
 @app.route('/')
 
 def create_json():
-    
+    """
     src = open(os.path.join("/Users/chrisjung/Downloads", "hello.m4a"))
     dst = "test.wav"
 
@@ -25,8 +25,8 @@ def create_json():
     # convert wav to mp3                                                            
     sound = AudioSegment.from_file(src, "aac")
     wavfile = sound.export(dst, format="wav")
-    
-    (rate,sig) = wav.read(wavfile)
+    """
+    (rate,sig) = wav.read("hello.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 

@@ -17,7 +17,7 @@ FlaskJSON(app)
 @app.route('/')
 
 def create_json():
-    (rate,sig) = wav.read("english.wav")
+    (rate,sig) = wav.read("english.m4a")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 

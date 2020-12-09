@@ -19,7 +19,7 @@ FlaskJSON(app)
 @app.route('/')
 
 def create_json():
-    src = os.path.join("/Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/FC4BFD27-DAFF-43B5-92CD-4F209067ECD1/Library/Caches/", "hello.m4a")
+    src = open(os.path.join("/Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/FC4BFD27-DAFF-43B5-92CD-4F209067ECD1/Library/Caches/", "hello.m4a"))
     dst = "test.wav"
 
     # convert wav to mp3                                                            

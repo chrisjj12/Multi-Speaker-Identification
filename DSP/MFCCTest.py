@@ -34,7 +34,7 @@ def create_json():
 
 
             # convert wav to mp3                                                            
-            sound = AudioSegment.from_file(src, "aac")
+            sound = AudioSegment.from_file(src, "m4a")
             wavfile = sound.export(dst, format="wav")
             
             (rate,sig) = wav.read(wavfile)

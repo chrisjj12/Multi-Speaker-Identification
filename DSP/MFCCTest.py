@@ -38,13 +38,13 @@ def create_json():
             sound = AudioSegment.from_file(src, "m4a")
             wavfile = sound.export(dst, format="wav")
 """          
-            (rate,sig) = wav.read("hello.m4a")
-            mfcc_feat = mfcc(sig, rate)
-            d_mfcc_feat = delta(mfcc_feat, 2)
-            fbank_feat = logfbank(sig, rate) 
-            python_arr = fbank_feat[1:3,:]
-            json_conv = python_arr.tolist()
-            database_format = json.dumps({"Chris": json_conv}) # Need to change to the user inputed name in the application
+    (rate,sig) = wav.read("hello.m4a")
+    mfcc_feat = mfcc(sig, rate)
+    d_mfcc_feat = delta(mfcc_feat, 2)
+    fbank_feat = logfbank(sig, rate) 
+    python_arr = fbank_feat[1:3,:]
+    json_conv = python_arr.tolist()
+    database_format = json.dumps({"Chris": json_conv}) # Need to change to the user inputed name in the application
 
 
     return render_template('main.html', dblist =  database_format)

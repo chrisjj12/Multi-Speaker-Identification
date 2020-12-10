@@ -24,6 +24,7 @@ def allowed_file(filename):
 
 
 def create_json():
+    """
     if request.method == 'POST':
         file = request.files['hello.m4a']
         if file:
@@ -36,8 +37,8 @@ def create_json():
             # convert wav to mp3                                                            
             sound = AudioSegment.from_file(src, "m4a")
             wavfile = sound.export(dst, format="wav")
-            
-            (rate,sig) = wav.read(wavfile)
+"""          
+            (rate,sig) = wav.read("hello.m4a")
             mfcc_feat = mfcc(sig, rate)
             d_mfcc_feat = delta(mfcc_feat, 2)
             fbank_feat = logfbank(sig, rate) 

@@ -36,7 +36,7 @@ def create_json():
     #file_name = wavefile.name
    
             
-    (rate,sig) = wav.read("test.wav")
+    (rate,sig) = wav.read("english.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 

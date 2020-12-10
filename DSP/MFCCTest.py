@@ -21,17 +21,17 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 """
 @app.route('/')
-
-#def upload_file():
+"""
+def upload_file():
     if request.method == 'POST':
         file = request.files['hello.m4a']
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['/Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/7E003075-2255-486D-B6E8-A1DF3D8365D5/Library/Caches'], filename))
-
+"""
 def create_json():
-    
-    file = request.files['hello.m4a']
+    if request.method == 'POST':
+        file = request.files['hello.m4a']
         if file:
             filename = secure_filename(file.filename)
             src = file.save(os.path.join(app.config['/Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/7E003075-2255-486D-B6E8-A1DF3D8365D5/Library/Caches'], filename))

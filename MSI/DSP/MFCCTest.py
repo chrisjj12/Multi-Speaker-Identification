@@ -20,9 +20,29 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 """
+
+
+@app.route('/audio_record', methods=['POST'])
+def save_record():
+
+    logger.info("welcome to upload`")
+    # file = request.files['file']
+    #filename = secure_filename(file.title)
+
+    file = request.files['file']
+
+    print('File from the POST request is: {}'.format(file))
+    try: 
+        read_audio_file(file[0])
+        return "****** Audio Read ******"
+    except: 
+        print("In the except", file[0]) # Gets printed as undefined
+        title = request.form['title']
+        print(title) # Able to print title 
+        return "Request received and responded"
+        # app.logger.debug(request.files['file'].filename) 
+
 @app.route('/')
-
-
 def create_json():
     
     

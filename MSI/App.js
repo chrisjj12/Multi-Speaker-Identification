@@ -63,7 +63,7 @@ class first_time_user extends React.Component {
       ios: 'hello.wav' //wav
     }) 
     */
-    const path = 'hello.m4a';
+    const path = 'hello.m4a'; //change this file name to the name inputted
     //const uri = await audioRecorderPlayer.startRecord(path);
     const AudioSet = {
       AudioEncoderAndroid: AudioEncoderAndroidType.AAC,
@@ -83,6 +83,7 @@ class first_time_user extends React.Component {
       });
     });
     console.log(`uri: ${uri}`);
+    return uri
   };
 
   stop_recording = async() => {
@@ -91,6 +92,7 @@ class first_time_user extends React.Component {
     this.setState({
       recordSecs: 0,
     });
+    
     console.log(result);
   };
 
@@ -128,6 +130,22 @@ class first_time_user extends React.Component {
     this.audioRecorderPlayer.removePlayBackListener();
   };
 
+  uploadFile(uri) {
+    var form = new FormData();
+    form.append('file',file)
+    fetch('http://0.0.0.0:80/', {
+        // content-type header should not be specified!
+        method: 'POST',
+        body: form
+    }).then(function (response){
+        return (response.text())
+    }).then(function(text){
+        console.log(text) // The text the endpoint returns
+    })
+        .catch(error => console.log(error)
+        );
+}
+
   render() {
     return (
       <Card style = {{flex: 1, flexDirection: 'row', alignItems: 'center', alignContent: 'center', alignSelf: 'center'}}>
@@ -152,15 +170,18 @@ class first_time_user extends React.Component {
         </Button>
         <View style = {{marginBottom: 100}}>
         </View>
-        <Button style = {{height: 80, backgroundColor: 'green'}} onPress = {() => this.create_file()}>
-          <Text style = {{color: 'white', fontSize: 50}}>
-            SUBMIT
-          </Text>
-        </Button>
       </Card>
     )
   }
 }
+
+/*
+<Button style = {{height: 80, backgroundColor: 'green'}} onPress = {() => this.create_file()}>
+          <Text style = {{color: 'white', fontSize: 50}}>
+            SUBMIT
+          </Text>
+        </Button>
+        */
 
 
 /*

@@ -31,9 +31,10 @@ def create_json():
             # convert wav to mp3                                                            
     sound = AudioSegment.from_file("hello.m4a", format = "m4a")
     wavfile = sound.export("test.wav", format="wav")
+    file_name = wavefile.name
    
             
-    (rate,sig) = wav.read(wavfile.name)
+    (rate,sig) = wav.read(file_name)
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 

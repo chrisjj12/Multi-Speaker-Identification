@@ -8,7 +8,7 @@ import json
 import scipy.io.wavfile as wav
 import os
 from pydub import AudioSegment
-#import boto3
+import boto3
 
 #UPLOAD_FOLDER = '/Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/7E003075-2255-486D-B6E8-A1DF3D8365D5/Library/Caches'
 #ALLOWED_EXTENSIONS = {'m4a', 'wav'}
@@ -21,16 +21,16 @@ FlaskJSON(app)
 def create_json():
     
     
-    #s3 = boto3.client('s3')
-    #s3audio = s3.download_file('iostoflask', '/audio', 'hello.m4a')
+    s3 = boto3.client('s3')
+    s3audio = s3.download_file('iostoflask', "hello.m4a", 'downloaded.m4a')
 
-    # convert wav to mp3                                                            
-    #sound = AudioSegment.from_file(s3audio, format = "m4a")
-    #wavfile = sound.export("test.wav", format="wav")
-    #file_name = wavefile.name
+    #convert wav to mp3                                                            
+    sound = AudioSegment.from_file(s3audio, format = "m4a")
+    wavfile = sound.export("test.wav", format="wav")
+    file_name = wavefile.name
    
             
-    (rate,sig) = wav.read("hello.wav")
+    (rate,sig) = wav.read(file_name)
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 
@@ -40,7 +40,7 @@ def create_json():
     with open('coeff.json', 'w') as json_file:
         json_file.write(database_format)
 
-
+    os.system("mv coeff.json newfile.json")
 
     return render_template('main.html', dblist =  database_format)
 

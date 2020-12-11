@@ -20,7 +20,7 @@ FlaskJSON(app)
 
 
 @app.route('/')
-def create_json():
+
 
 
     #s3_client = boto3.client("https://iostoflask.s3.us-east-2.amazonaws.com/audio/file%3A///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a")
@@ -49,12 +49,13 @@ def create_json():
 
 
    
-            
-    (rate,sig) = wav.read("StarWars3.wav")
+def create_json():           
+    (rate,sig) = wav.read("english.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate)
     python_arr = fbank_feat[1:3,:]
+    print(python_arr)
     json_conv = python_arr.tolist()
     database_format = json.dumps({"Chris": json_conv}) # Need to change to the user inputed name in the application
 

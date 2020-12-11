@@ -22,15 +22,19 @@ FlaskJSON(app)
 @app.route('/')
 def create_json():
     
-    
+    os.environ['AWS_PROFILE'] = "MyProfile1"
+    os.environ['AWS_DEFAULT_REGION'] = "us-east-2"
+
+    print('sfsafsdf')
     s3 = boto3.client('s3')
+    print('asdfsdfasasgsdgsg')
     s3audio = s3.download_file('iostoflask', 'Chris.m4a', 'downloaded.m4a')
 
 
 
     #convert wav to mp3                                                            
     sound = AudioSegment.from_file(s3audio, format = "m4a")
-    wavfile = sound.export("convert.wav", format="wav")
+    wavfile = sound.export("convert.wav", format = "wav")
     file_name = wavefile.name
 
 

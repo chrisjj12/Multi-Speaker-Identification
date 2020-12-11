@@ -31,7 +31,7 @@ def create_json():
 
 
     #convert wav to mp3                                                            
-    sound = AudioSegment.from_file("https://s3.us-east-2.amazonaws.com/iostoflask/audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a", format = "m4a")
+    sound = AudioSegment.from_file("https://iostoflask.s3.amazonaws.com/audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a", format = "m4a")
     print('kllkkk')
     wavfile = sound.export("convert.wav", format = "wav")
     print('yaaa')

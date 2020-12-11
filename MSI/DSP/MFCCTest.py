@@ -19,7 +19,7 @@ app = Flask(__name__, template_folder = "Templates")
 FlaskJSON(app)
 
 
-@app.route('/')
+@app.route('/', methods = ['GET'])
 def create_json():
 
 

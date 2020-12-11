@@ -10,6 +10,7 @@ import os
 from pydub import AudioSegment
 import boto3
 import botocore
+import time
 
 #UPLOAD_FOLDER = '/Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/7E003075-2255-486D-B6E8-A1DF3D8365D5/Library/Caches'
 #ALLOWED_EXTENSIONS = {'m4a', 'wav'}
@@ -25,10 +26,14 @@ def create_json():
     s3 = boto3.client('s3')
     s3audio = s3.download_file('iostoflask', "Hello.m4a", 'downloaded.m4a')
 
+    time.sleep(5)
+
     #convert wav to mp3                                                            
     sound = AudioSegment.from_file(s3audio, format = "m4a")
     wavfile = sound.export("convert.wav", format="wav")
     file_name = wavefile.name
+
+    time.sleep(5)
    
             
     (rate,sig) = wav.read(file_name)
@@ -38,6 +43,9 @@ def create_json():
     python_arr = fbank_feat[1:3,:]
     json_conv = python_arr.tolist()
     database_format = json.dumps({"Chris": json_conv}) # Need to change to the user inputed name in the application
+
+    time.sleep(5)
+    
     with open('coeff.json', 'w') as json_file:
         json_file.write(database_format)
 

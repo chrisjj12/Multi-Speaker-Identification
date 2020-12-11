@@ -40,7 +40,7 @@ def create_json():
     with open('coeff.json', 'w') as json_file:
         json_file.write(database_format)
 
-    os.system("mv coeff.json newfile.json")
+    #os.system("mv coeff.json newfile.json")
 
     return render_template('main.html', dblist =  database_format)
 

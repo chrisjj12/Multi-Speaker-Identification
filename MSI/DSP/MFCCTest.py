@@ -6,11 +6,11 @@ from flask import Flask, flash, render_template, request, send_file, jsonify, re
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 import json
 import scipy.io.wavfile as wav
-import os
-from pydub import AudioSegment
-import boto3
-import botocore
-import time
+#import os
+#from pydub import AudioSegment
+#import boto3
+#import botocore
+#import time
 
 #UPLOAD_FOLDER = '/Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/7E003075-2255-486D-B6E8-A1DF3D8365D5/Library/Caches'
 #ALLOWED_EXTENSIONS = {'m4a', 'wav'}

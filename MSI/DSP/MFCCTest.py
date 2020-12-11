@@ -41,8 +41,11 @@ def create_json():
     sound = AudioSegment.from_file("Chris.m4a", format = "m4a")
 
     wavfile = sound.export("convert.wav", format = "wav")
+    print(wavfile)
 
-    #file_name = wavefile.name
+    file_name = wavefile.name
+
+    print(file_name)
 
 
    

@@ -53,14 +53,14 @@ def create_json():
     (rate,sig) = wav.read("StarWars3.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
-    fbank_feat = logfbank(sig, rate) 
+    fbank_feat = logfbank(sig, rate)
     python_arr = fbank_feat[1:3,:]
     json_conv = python_arr.tolist()
     database_format = json.dumps({"Chris": json_conv}) # Need to change to the user inputed name in the application
 
     
-    with open('coeff2.json', 'w') as json_file:
-        json_file.write(database_format)
+    #with open('coeff2.json', 'w') as json_file:
+        #json_file.write(database_format)
 
     #os.system("mv coeff.json newfile.json")
 

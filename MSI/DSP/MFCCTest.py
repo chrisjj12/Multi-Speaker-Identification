@@ -21,12 +21,10 @@ FlaskJSON(app)
 
 @app.route('/')
 def create_json():
-    
-    os.environ['AWS_PROFILE'] = "MyProfile1"
-    os.environ['AWS_DEFAULT_REGION'] = "us-east-2"
+
 
     print('sfsafsdf')
-    s3 = boto3.client('s3')
+    s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key= AWS_SECRET_ACCESS_KEY)
     print('asdfsdfasasgsdgsg')
     s3audio = s3.download_file('iostoflask', 'Chris.m4a', 'downloaded.m4a')
 

@@ -36,10 +36,10 @@ def create_json():
     try:
         s3audio = s3.Bucket(BUCKET_NAME).download_file(KEY, 'downloaded.m4a')
     except botocore.exceptions.ClientError as e:
-    if e.response['Error']['Code'] == "404":
-        print("The object does not exist.")
-    else:
-        raise
+        if e.response['Error']['Code'] == "404":
+            print("The object does not exist.")
+        else:
+            raise
 
 
 

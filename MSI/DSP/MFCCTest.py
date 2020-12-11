@@ -22,7 +22,7 @@ def create_json():
     
     
     s3 = boto3.client('s3')
-    s3audio = s3.download_file('iostoflask', "hello.m4a", 'downloaded.m4a')
+    s3audio = s3.download_file('iostoflask', "Chris.m4a", 'downloaded.m4a')
 
     #convert wav to mp3                                                            
     sound = AudioSegment.from_file(s3audio, format = "m4a")

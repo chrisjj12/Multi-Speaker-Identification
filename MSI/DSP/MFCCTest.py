@@ -24,8 +24,10 @@ def create_json():
     
     
     #s3 = boto3.client('s3')
+    print('hi')
     s3 = boto3.client('s3')
     s3audio = s3.download_file('iostoflask', 'Chris.m4a', 'downloaded.m4a')
+    print('asdfasdf')
 
     time.sleep(5)
 

@@ -28,7 +28,7 @@ def create_json():
     BUCKET_NAME = 'iostoflask' # replace with your bucket name
     KEY = 'Chris.m4a' # replace with your object key
 
-s   3 = boto3.resource('s3')
+    s3 = boto3.resource('s3')
 
     try:
         s3.Bucket(BUCKET_NAME).download_file(KEY, 'downloaded.m4a')

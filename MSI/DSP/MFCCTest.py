@@ -38,10 +38,10 @@ def create_json():
 
 
     #convert wav to mp3                                                            
-    sound = AudioSegment.from_file(s3audio, format = "m4a")
-    print('kllk3k')
+    sound = AudioSegment.from_file("Chris.m4a", format = "m4a")
+
     wavfile = sound.export("convert.wav", format = "wav")
-    print('yaaa')
+
     file_name = wavefile.name
 
 

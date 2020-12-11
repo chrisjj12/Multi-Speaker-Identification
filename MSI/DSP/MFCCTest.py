@@ -23,17 +23,34 @@ FlaskJSON(app)
 def create_json():
 
 
-    s3_client = boto3.client("https://iostoflask.s3.us-east-2.amazonaws.com/audio/file%3A///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a")
+    #s3_client = boto3.client("https://iostoflask.s3.us-east-2.amazonaws.com/audio/file%3A///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a")
     #s3audio = s3_client("https://iostoflask.s3.us-east-2.amazonaws.com/audio/file%3A///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a")
     #s3audio = s3_client.download_file('iostoflask', 'audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a', 'downloaded.m4a')
-    url = s3.generate_presigned_url('get_object', Params = {'Bucket': 'iostoflask', 'Key': 'audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a'}, ExpiresIn = 100)
+    #url = s3.generate_presigned_url('get_object', Params = {'Bucket': 'iostoflask', 'Key': 'audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a'}, ExpiresIn = 100)
+
+    BUCKET_NAME = 'iostoflask' # replace with your bucket name
+    KEY = 'audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a' # replace with your object key
+
+    s3 = boto3.resource('s3')
+
+    try:
+        s3audio = s3.Bucket(BUCKET_NAME).download_file(KEY, 'downloaded.m4a')
+    except botocore.exceptions.ClientError as e:
+    if e.response['Error']['Code'] == "404":
+        print("The object does not exist.")
+    else:
+        raise
+
+
 
     print('sfgasg')
 
 
 
+
+
     #convert wav to mp3                                                            
-    sound = AudioSegment.from_file(url, format = "m4a")
+    sound = AudioSegment.from_file(s3audio, format = "m4a")
     print('kllk3k')
     wavfile = sound.export("convert.wav", format = "wav")
     print('yaaa')

@@ -24,9 +24,11 @@ def create_json():
 
 
     print('sfsafsdf')
-    s3_client = boto3.client('s3')
+    s3_client = boto3.client('s3','us-east-2',
+        aws_access_key_id='AKIAJ6QLTOKIBPZBR65A',
+        aws_secret_access_key='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')
     print('asdfsdfasasgsdgsg')
-    s3audio = s3_client.download_file('iostoflask', 'Chris.m4a', 'downloaded.m4a')
+    s3audio = s3_client.download_file('iostoflask', 'audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a', 'downloaded.m4a')
 
     print('mjcf')
 

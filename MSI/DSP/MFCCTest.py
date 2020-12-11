@@ -50,7 +50,7 @@ def create_json():
 
    
             
-    (rate,sig) = wav.read("Chris.wav")
+    (rate,sig) = wav.read("StarWars3.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 

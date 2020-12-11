@@ -28,8 +28,8 @@ def create_json():
     #s3audio = s3_client.upload('iostoflask', 'audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a', 'downloaded.m4a')
     #url = s3.generate_presigned_url('get_object', Params = {'Bucket': 'iostoflask', 'Key': 'audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a'}, ExpiresIn = 100)
 
-    s3_client = boto3.client('s3')
-    s3audio = s3_client.upload_file('downloaded.m4a', 'iostoflask', 'audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a')
+    #s3_client = boto3.client('s3')
+    #s3audio = s3_client.upload_file('downloaded.m4a', 'iostoflask', 'audio/file:///Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/0EFB813A-C67D-45E1-9826-7A5EBF0AD6BC/Library/Caches/Chris.m4a')
 
     print('sfgasg')
 
@@ -56,7 +56,7 @@ def create_json():
     database_format = json.dumps({"Chris": json_conv}) # Need to change to the user inputed name in the application
 
     
-    with open('coeff.json', 'w') as json_file:
+    with open('coeff2.json', 'w') as json_file:
         json_file.write(database_format)
 
     #os.system("mv coeff.json newfile.json")

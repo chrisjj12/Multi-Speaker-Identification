@@ -23,30 +23,17 @@ FlaskJSON(app)
 def create_json():
     
     
-    #s3 = boto3.client('s3')
-    #s3audio = s3.download_file('iostoflask', 'Chris.m4a', 'downloaded.m4a')
-    BUCKET_NAME = 'iostoflask' # replace with your bucket name
-    KEY = 'Chris.m4a' # replace with your object key
+    s3 = boto3.client('s3')
+    s3audio = s3.download_file('iostoflask', 'Chris.m4a', 'downloaded.m4a')
 
-    s3 = boto3.resource('s3')
 
-    #try:
-    s3audio = s3.Bucket(BUCKET_NAME).download_file(KEY, 'downloaded.m4a')
-    #except botocore.exceptions.ClientError as e:
-        
-        #if e.response['Error']['Code'] == "404":
-            #print("The object does not exist.")
-        #else:
-            #raise
-
-    time.sleep(5)
 
     #convert wav to mp3                                                            
     sound = AudioSegment.from_file(s3audio, format = "m4a")
     wavfile = sound.export("convert.wav", format="wav")
     file_name = wavefile.name
 
-    time.sleep(5)
+
    
             
     (rate,sig) = wav.read(file_name)
@@ -57,7 +44,6 @@ def create_json():
     json_conv = python_arr.tolist()
     database_format = json.dumps({"Chris": json_conv}) # Need to change to the user inputed name in the application
 
-    time.sleep(5)
     
     with open('coeff.json', 'w') as json_file:
         json_file.write(database_format)

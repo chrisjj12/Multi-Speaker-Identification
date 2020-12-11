@@ -42,12 +42,12 @@ def create_json():
 
     wavfile = sound.export("convert.wav", format = "wav")
 
-    file_name = wavefile.name
+    #file_name = wavefile.name
 
 
    
             
-    (rate,sig) = wav.read(file_name)
+    (rate,sig) = wav.read(wavfile)
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 

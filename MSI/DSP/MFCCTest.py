@@ -30,13 +30,14 @@ def create_json():
 
     s3 = boto3.resource('s3')
 
-    try:
-        s3audio = s3.Bucket(BUCKET_NAME).download_file(KEY, 'downloaded.m4a')
-    except botocore.exceptions.ClientError as e:
-        if e.response['Error']['Code'] == "404":
-            print("The object does not exist.")
-        else:
-            raise
+    #try:
+    s3audio = s3.Bucket(BUCKET_NAME).download_file(KEY, 'downloaded.m4a')
+    #except botocore.exceptions.ClientError as e:
+        
+        #if e.response['Error']['Code'] == "404":
+            #print("The object does not exist.")
+        #else:
+            #raise
 
     time.sleep(5)
 

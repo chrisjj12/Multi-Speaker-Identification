@@ -12,6 +12,7 @@
 9.  Swaped input of ML model from .wav file stored in a location (2 .wav files) to new input from react native (a signle .wav file)
 10. Changed output to be a single output .wav file
 11. had output of denoiser feed into input of speech separator seemlessly
+12. Swapped ML model from the MATLAB code to the SincNet
 
 To Do:
 - run my own voice with another voice and observe results

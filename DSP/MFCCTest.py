@@ -1,81 +1,53 @@
 #!/usr/bin/env python
-"""
 from MFCC import mfcc
 from MFCC import delta
 from MFCC import logfbank
-from flask import Flask, render_template, request, send_file, jsonify
+from flask import Flask, flash, render_template, request, send_file, jsonify, redirect, url_for
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 import json
 import scipy.io.wavfile as wav
+import os
+from pydub import AudioSegment
 
+#UPLOAD_FOLDER = '/Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/7E003075-2255-486D-B6E8-A1DF3D8365D5/Library/Caches'
+#ALLOWED_EXTENSIONS = {'m4a', 'wav'}
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder = "Templates")
 FlaskJSON(app)
-#file_name = "kcoeff.json"
-
+#app.config['/Users/chrisjung/Library/Developer/CoreSimulator/Devices/5ED1D61C-0B4C-4117-BC61-79D31733A199/data/Containers/Data/Application/7E003075-2255-486D-B6E8-A1DF3D8365D5/Library/Caches'] = UPLOAD_FOLDER
+"""
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+"""
 @app.route('/')
 
-def dsp():
 
-    #return render_template('main.html')
+def create_json():
+    
+    
 
 
-
-#def create_json():
-    (rate,sig) = wav.read("english.wav")
+            # convert wav to mp3                                                            
+    #sound = AudioSegment.from_file("hello.m4a", format = "m4a")
+    
+    #wavfile = sound.export("test.wav", format="wav")
+    
+    #file_name = wavefile.name
+   
+            
+    (rate,sig) = wav.read("test.wav")
     mfcc_feat = mfcc(sig, rate)
     d_mfcc_feat = delta(mfcc_feat, 2)
     fbank_feat = logfbank(sig, rate) 
     python_arr = fbank_feat[1:3,:]
-    main = python_arr.tolist()
+    json_conv = python_arr.tolist()
+    database_format = json.dumps({"Chris": json_conv}) # Need to change to the user inputed name in the application
 
 
-#database_format = json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application
-#print(json.dumps({"Name": json_conv})) # Need to change to the user inputed name in the application
-
-#print(database_format)
-
-    return render_template('main.html',main=main)
+    return render_template('main.html', dblist =  database_format)
 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)
 
-#print(fbank_feat[1:3,:])w
-
-#course_list = list(client.db.course_col.find({"major": major.upper()}))
- #   return flask.jsonify(**course_list)
-"""
-from datetime import datetime
-from flask import Flask, request
-from flask_json import FlaskJSON, JsonError, json_response, as_json
-
-app = Flask(__name__)
-FlaskJSON(app)
-
-
-@app.route('/get_time')
-def get_time():
-    now = datetime.utcnow()
-    return json_response(time=now)
-
-
-@app.route('/increment_value', methods=['POST'])
-def increment_value():
-    # We use 'force' to skip mimetype checking to have shorter curl command.
-    data = request.get_json(force=True)
-    try:
-        value = int(data['value'])
-    except (KeyError, TypeError, ValueError):
-        raise JsonError(description='Invalid value.')
-    return json_response(value=value + 1)
-
-
-@app.route('/get_value')
-@as_json
-def get_value():
-    return dict(value=12)
-
-
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)

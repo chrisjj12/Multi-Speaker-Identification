@@ -217,42 +217,42 @@ optimizer_DNN2 = optim.RMSprop(DNN2_net.parameters(), lr=lr,alpha=0.95, eps=1e-8
 
 
 
-for epoch in range(N_epochs):
+# for epoch in range(N_epochs):
   
-  test_flag=0
-  CNN_net.train()
-  DNN1_net.train()
-  DNN2_net.train()
+#   test_flag=0
+#   CNN_net.train()
+#   DNN1_net.train()
+#   DNN2_net.train()
  
-  loss_sum=0
-  err_sum=0
+#   loss_sum=0
+#   err_sum=0
 
-  for i in range(N_batches):
+#   for i in range(N_batches):
 
-    [inp,lab]=create_batches_rnd(batch_size,data_folder,wav_lst_tr,snt_tr,wlen,lab_dict,0.2)
-    pout=DNN2_net(DNN1_net(CNN_net(inp)))
+#     [inp,lab]=create_batches_rnd(batch_size,data_folder,wav_lst_tr,snt_tr,wlen,lab_dict,0.2)
+#     pout=DNN2_net(DNN1_net(CNN_net(inp)))
     
-    pred=torch.max(pout,dim=1)[1]
-    loss = cost(pout, lab.long())
-    err = torch.mean((pred!=lab.long()).float())
+#     pred=torch.max(pout,dim=1)[1]
+#     loss = cost(pout, lab.long())
+#     err = torch.mean((pred!=lab.long()).float())
     
    
     
-    optimizer_CNN.zero_grad()
-    optimizer_DNN1.zero_grad() 
-    optimizer_DNN2.zero_grad() 
+#     optimizer_CNN.zero_grad()
+#     optimizer_DNN1.zero_grad() 
+#     optimizer_DNN2.zero_grad() 
     
-    loss.backward()
-    optimizer_CNN.step()
-    optimizer_DNN1.step()
-    optimizer_DNN2.step()
+#     loss.backward()
+#     optimizer_CNN.step()
+#     optimizer_DNN1.step()
+#     optimizer_DNN2.step()
     
-    loss_sum=loss_sum+loss.detach()
-    err_sum=err_sum+err.detach()
+#     loss_sum=loss_sum+loss.detach()
+#     err_sum=err_sum+err.detach()
  
 
-  loss_tot=loss_sum/N_batches
-  err_tot=err_sum/N_batches
+#   loss_tot=loss_sum/N_batches
+#   err_tot=err_sum/N_batches
   
  
    

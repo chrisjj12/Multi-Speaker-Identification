@@ -301,14 +301,17 @@ optimizer_DNN2 = optim.RMSprop(DNN2_net.parameters(), lr=lr,alpha=0.95, eps=1e-8
          count_fr_tot=count_fr_tot+1
          if count_fr==Batch_dev:
              inp=Variable(sig_arr)
-             pout[count_fr_tot-Batch_dev:count_fr_tot,:]=DNN2_net(DNN1_net(CNN_net(inp)))
+            # pout[count_fr_tot-Batch_dev:count_fr_tot,:]=DNN2_net(DNN1_net(CNN_net(inp)))
+             pout[count_fr_tot-Batch_dev:count_fr_tot,:]=CNN_net(inp)
              count_fr=0
              sig_arr=torch.zeros([Batch_dev,wlen]).float().cuda().contiguous()
    
      if count_fr>0:
       inp=Variable(sig_arr[0:count_fr])
-      pout[count_fr_tot-count_fr:count_fr_tot,:]=DNN2_net(DNN1_net(CNN_net(inp)))
+     # pout[count_fr_tot-count_fr:count_fr_tot,:]=DNN2_net(DNN1_net(CNN_net(inp)))
+      pout[count_fr_tot-count_fr:count_fr_tot,:]=CNN_net(inp)
 
+    
     
      pred=torch.max(pout,dim=1)[1]
      # loss = cost(pout, lab.long())

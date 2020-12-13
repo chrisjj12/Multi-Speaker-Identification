@@ -311,19 +311,19 @@ optimizer_DNN2 = optim.RMSprop(DNN2_net.parameters(), lr=lr,alpha=0.95, eps=1e-8
 
     
      pred=torch.max(pout,dim=1)[1]
-     loss = cost(pout, lab.long())
-     err = torch.mean((pred!=lab.long()).float())
+     # loss = cost(pout, lab.long())
+     # err = torch.mean((pred!=lab.long()).float())
     
      [val,best_class]=torch.max(torch.sum(pout,dim=0),0)
      err_sum_snt=err_sum_snt+(best_class!=lab[0]).float()
     
     
-     loss_sum=loss_sum+loss.detach()
-     err_sum=err_sum+err.detach()
+    #  loss_sum=loss_sum+loss.detach()
+    #  err_sum=err_sum+err.detach()
     
-    err_tot_dev_snt=err_sum_snt/snt_te
-    loss_tot_dev=loss_sum/snt_te
-    err_tot_dev=err_sum/snt_te
+    # err_tot_dev_snt=err_sum_snt/snt_te
+    # loss_tot_dev=loss_sum/snt_te
+    # err_tot_dev=err_sum/snt_te
 
   
   #  print("epoch %i, loss_tr=%f err_tr=%f loss_te=%f err_te=%f err_te_snt=%f" % (epoch, loss_tot,err_tot,loss_tot_dev,err_tot_dev,err_tot_dev_snt))

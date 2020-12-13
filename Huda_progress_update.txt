@@ -13,6 +13,8 @@
 10. Changed output to be a single output .wav file
 11. had output of denoiser feed into input of speech separator seemlessly
 12. Swapped ML model from the MATLAB code to the SincNet
+13. Removed the training portion of the code for SincNet
+14. edited code for loading model according to what worked with our system
 
 To Do:
 - run my own voice with another voice and observe results

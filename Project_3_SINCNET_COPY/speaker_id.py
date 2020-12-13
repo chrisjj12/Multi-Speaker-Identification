@@ -208,6 +208,8 @@ if pt_file!='none':
    CNN_net.load_state_dict(checkpoint_load['CNN_model_par'])
    DNN1_net.load_state_dict(checkpoint_load['DNN1_model_par'])
    DNN2_net.load_state_dict(checkpoint_load['DNN2_model_par'])
+   print(">> loaded model :)")
+
 
 
 
@@ -258,7 +260,7 @@ optimizer_DNN2 = optim.RMSprop(DNN2_net.parameters(), lr=lr,alpha=0.95, eps=1e-8
    
    
 # Full Validation  new  
-  if epoch%N_eval_epoch==0:
+#  if epoch%N_eval_epoch==0:
       
    CNN_net.eval()
    DNN1_net.eval()
@@ -324,18 +326,18 @@ optimizer_DNN2 = optim.RMSprop(DNN2_net.parameters(), lr=lr,alpha=0.95, eps=1e-8
     err_tot_dev=err_sum/snt_te
 
   
-   print("epoch %i, loss_tr=%f err_tr=%f loss_te=%f err_te=%f err_te_snt=%f" % (epoch, loss_tot,err_tot,loss_tot_dev,err_tot_dev,err_tot_dev_snt))
+  #  print("epoch %i, loss_tr=%f err_tr=%f loss_te=%f err_te=%f err_te_snt=%f" % (epoch, loss_tot,err_tot,loss_tot_dev,err_tot_dev,err_tot_dev_snt))
   
-   with open(output_folder+"/res.res", "a") as res_file:
-    res_file.write("epoch %i, loss_tr=%f err_tr=%f loss_te=%f err_te=%f err_te_snt=%f\n" % (epoch, loss_tot,err_tot,loss_tot_dev,err_tot_dev,err_tot_dev_snt))   
+  #  with open(output_folder+"/res.res", "a") as res_file:
+  #   res_file.write("epoch %i, loss_tr=%f err_tr=%f loss_te=%f err_te=%f err_te_snt=%f\n" % (epoch, loss_tot,err_tot,loss_tot_dev,err_tot_dev,err_tot_dev_snt))   
 
-   checkpoint={'CNN_model_par': CNN_net.state_dict(),
-               'DNN1_model_par': DNN1_net.state_dict(),
-               'DNN2_model_par': DNN2_net.state_dict(),
-               }
-   torch.save(checkpoint,output_folder+'/model_raw.pkl')
+  #  checkpoint={'CNN_model_par': CNN_net.state_dict(),
+  #              'DNN1_model_par': DNN1_net.state_dict(),
+  #              'DNN2_model_par': DNN2_net.state_dict(),
+  #              }
+  #  torch.save(checkpoint,output_folder+'/model_raw.pkl')
   
-  else:
-   print("epoch %i, loss_tr=%f err_tr=%f" % (epoch, loss_tot,err_tot))
+  # else:
+  #  print("epoch %i, loss_tr=%f err_tr=%f" % (epoch, loss_tot,err_tot))
 
 

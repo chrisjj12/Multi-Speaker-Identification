@@ -1,0 +1,11 @@
+import torch
+import json  
+
+model = 'exp/SincNet_TIMIT/model_raw.pkl'
+
+with open(model, 'rb') as f:
+    data = torch.load(f)
+    print(data)
+     
+torch.save((data),'model.txt')
+print(1)

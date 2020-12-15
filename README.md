@@ -8,7 +8,7 @@ After the user has their file saved they will use the the Phone APP again to det
 
 ## How the Application Works
 
-The home page has two different buttons, "First Time User" and "Operation." 
+The home page has three different buttons, "Home Page", "First Time User" and "Speaker Identifier." 
 
 ### First Time User Instructions
 

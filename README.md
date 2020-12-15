@@ -1,5 +1,23 @@
 # Multi Speaker Identification
 
+## System Architecture
+
+The user will use the Phone APP to create an audio file in .m4a format. This file will be processed and saved into a AWS S3 Bucket for storage. With the AWS EC2 Instance, the AWS REST API will upload the file from S3 Bucket and convert the file from .m4a to .wav. Then it will process the .wav file to turn the .wav signal into Mel-Frequency Cepstrum Coefficients in json format and create a .json file. This JSON file will then be returned to be saved in the Phone file system with their name.
+
+After the user has their file saved they will use the the Phone APP again to determine who the user is. Like before the .m4a audio file will processed in the same way. However, when the JSON file is returned to the phone file system it will compare the Mel-Frequency Cepstrum Coefficients to those in the other existing files. If there is a match, the APP will say there is a match and display the speaker's name.
+
+## How the Application Works
+
+The home page has two different buttons, "First Time User" and "Operation." 
+
+### First Time User Instructions
+
+A first time user will enter the "First Time User" button. Once the user gets to that new page, the user will press the record button and read the displayed statement "The sun is shining bright today" outloud. Once that is finished they will hit the Stop button. They can hit the play button to listen to the recording as well. The user will then enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
+
+### Operation Instructions
+
+To test to see if the speaker can be identified, The user will press the record button and read the displayed statement "The sun is shining bright today" outloud again. Once that is finished they will hit the Stop button. They can hit the play button to listen to the recording as well. The user will then enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
+
 ## DSP RESEARCH
 
 Cited source: https://pdfs.semanticscholar.org/c082/f14d48d2ac744a5cdc2fbe7ac2a55887c86f.pdf
@@ -59,21 +77,17 @@ DNN-WPM: https://arxiv.org/pdf/1803.09016.pdf
 
 ## Code Diagram Explained
 
-Inputted signal -> ML -> DSP MFCC -> JSON Database
-
-The inputted signal will be processed by ML, which will eliminate the white noise to make the voice sound clearer and more understandable. Once that is done it will create a .wav file that will go through signal processing and then mel-frequency cepstral analysis to create K-coefficients. These K coefficients will be place in a .json database.
-
 ## How the Application Works
 
 The home page has two different buttons, "First Time User" and "Operation." 
 
 ### First Time User Instructions
 
-A first time user will enter the "First Time User" button. Once the user gets to that new page, the user will press the record button and read a displayed statement outloud. Once that is finished they will enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
+A first time user will enter the "First Time User" button. Once the user gets to that new page, the user will press the record button and read the displayed statement "The sun is shining bright today" outloud. Once that is finished they will hit the Stop button. They can hit the play button to listen to the recording as well. The user will then enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
 
 ### Operation Instructions
 
-To test to see if the speaker can be identified, the user will hit the "Operation" button. Once the user gets to that new page, the microphone will be continuously on and be hearing for the displayed message to be read. Once it is read, the app will make . wav file. The app will compare the K-coefficients pulled form the .wav to those in the .json database and if there is a match, the name of the user will pop-up, but if not, a pop-up saying, "No match" will be displayed.
+To test to see if the speaker can be identified, The user will press the record button and read the displayed statement "The sun is shining bright today" outloud again. Once that is finished they will hit the Stop button. They can hit the play button to listen to the recording as well. The user will then enter their name in the textbox below and press submit. This will create the K-coefficients and will add them to .json file.
 
 ## References:
 

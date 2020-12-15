@@ -94,8 +94,7 @@ To test to see if the speaker can be identified, The user will press the record 
 ## References:
 
 All ownership and rights to the files (MFCC.py, MFCCTest.py, sigproc.py, english.wav, and the directory, __pycache__) in the DSP folder belong to this repository, https://github.com/pchao6/Speech_Feature_Extraction
-<<<<<<< HEAD
-=======
+
 All ownership and rights to the files in the Sample_Repos/deeplearningsourceseparation belong to this repository, https://github.com/posenhuang/deeplearningsourceseparation
 All ownership and rights to the files in the Project_3_SINCNET_COPY belong to this repository, https://github.com/mravanelli/SincNet. 
 All ownership and rights to the files in the Sample_Repos/sonus-master/ belong to this repository, https://github.com/evancohen/sonus

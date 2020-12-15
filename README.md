@@ -2,7 +2,7 @@
 
 ## System Architecture
 
-![System Architecture](https://github.com/chrisjj12/Multi-Speaker-Identification/blob/master/System_Architecture.pdf)
+![System Architecture](https://github.com/chrisjj12/Multi-Speaker-Identification/blob/master/System_Architecture.png)
 
 The user will use the Phone APP to create an audio file in .m4a format. This file will be processed and saved into a AWS S3 Bucket for storage. With the AWS EC2 Instance, the AWS REST API will upload the file from S3 Bucket and convert the file from .m4a to .wav. Then it will process the .wav file to turn the .wav signal into Mel-Frequency Cepstrum Coefficients in json format and create a .json file. This JSON file will then be returned to be saved in the Phone file system with their name.
 
